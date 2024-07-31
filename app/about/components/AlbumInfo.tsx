@@ -6,7 +6,7 @@ type Props = {
 };
 
 export const AlbumInfo: FC<Props> = ({ title, tracks }) => (
-  <section className="flex flex-col justify-center bg-mexi-black bg-opacity-50 p-4">
+  <section className="flex flex-col justify-center p-4">
     <h2 className="text-lg font-medium">{title}</h2>
     <ol>
       {tracks.map((track) => (
