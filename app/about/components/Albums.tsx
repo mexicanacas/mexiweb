@@ -12,7 +12,7 @@ const DiegoTracks = ['Diego Licarno (Viva Mæxico)'];
 const PlataTracks = [
   'Fireball (feat. Flo Ryan)',
   'Yo No Sé',
-  "Gasolina (feat. Lil' Jake",
+  "Gasolina (feat. Lil' Jake)",
 ];
 
 export const Albums = () => {

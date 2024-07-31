@@ -7,9 +7,11 @@ const About = () => (
   <div>
     <BackgroundImage alt="Mexicanacas" src="/album-image.jpg" />
     <div className="full-page-component justify-around pt-header md:pt-logo-big">
-      <InfoText />
-      <Albums />
-      <CreditAndre />
+      <div className="bg-mexi-black bg-opacity-50">
+        <InfoText />
+        <Albums />
+        <CreditAndre />
+      </div>
     </div>
   </div>
 );
