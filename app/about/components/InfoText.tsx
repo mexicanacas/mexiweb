@@ -1,5 +1,6 @@
 export const InfoText = () => (
   <section className="flex flex-col gap-4 p-4 md:max-w-md">
+    <h1 className="text-2xl md:text-4xl">Om oss</h1>
     <p>
       Vi er et band som spiller akustisk latin fusion-musikk - med utgangspunkt
       i mariachi-kulturen fra Mexico. Bandet ble opprettet av studenter i

@@ -4,11 +4,11 @@
 
 :root {
   --foreground-rgb: 255, 255, 255;
-  --background-color: #101010;
+  --background-color: #EEF2CE;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
+  color: #01261C;
   overflow-x: hidden;
   background-color: var(--background-color);
 }

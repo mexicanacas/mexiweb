@@ -3,6 +3,7 @@ import React, { FC, ReactNode } from 'react';
 
 import './globals.css';
 import { Header } from './header/Header';
+import { Footer } from './footer/Footer';
 
 type Props = {
   children: ReactNode;
@@ -20,8 +21,8 @@ const RootLayout: FC<Props> = ({ children }) => {
       </head>
       <body>
         <Header />
-        <main className="min-h-screen min-w-screen">{children}</main>
-        <footer>{/* Your footer content goes here */}</footer>
+        <main className="min-w-screen min-h-screen">{children}</main>
+        <Footer />
       </body>
     </html>
   );

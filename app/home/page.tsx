@@ -1,18 +1,29 @@
 import { Social } from './components/Social';
 import { PromoVideo } from './components/PromoVideo';
 
-import { CreditAndre } from '../core/components/CreditAndre';
-import { BackgroundImage } from '../core/components/BackgroundImage';
 import { ConcertPromo } from './components/ConcertPromo';
+import Image from 'next/image';
+import { IntroText } from './components/IntroText';
 
 export default function Home() {
   return (
-    <div>
-      <BackgroundImage alt="Mexicanacas" src="/homepage-image.jpg" />
-      <div className="full-page-component justify-end p-12">
-        <CreditAndre />
+    <div className="flex flex-col items-center">
+      <div className="relative h-fit w-full">
+        <Image
+          alt="Mexicanacas"
+          src="/homepage-image.jpg"
+          quality={100}
+          width={100}
+          height={100}
+          style={{
+            width: '100%',
+          }}
+          sizes="100%"
+        />
+      </div>
+      <div className="flex w-full max-w-lg flex-col gap-8 p-12">
+        <IntroText />
         <Social />
-        <ConcertPromo />
       </div>
       <PromoVideo />
     </div>
