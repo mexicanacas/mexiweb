@@ -32,6 +32,7 @@ const Booking = () => {
       <Image
         alt="En smilende fiolinist"
         src="/booking-harald.jpg"
+        className="shadow-md"
         width={300}
         height={300}
       />

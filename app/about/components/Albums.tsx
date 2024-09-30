@@ -43,6 +43,13 @@ export const Albums = () => {
           href="https://open.spotify.com/album/5I2j5UPKxM1VBdj0c2agOM?si=0WPjoDhLS62x1cXijEoW9g"
         />
         <AlbumInfo title="Plata - 2023" tracks={PlataTracks} />
+        <AlbumCover
+          src="/mex-tape-cover.png"
+          alt="Cover for utgivelsen Mex-tape"
+          credit="Grafikk av Sigmund Bjørnhaug"
+          href="https://open.spotify.com/album/3rcCFI72gT7S7VC868Iuxm?si=QZaj5awaSzuyHZ6D8JtEbw"
+        />
+        <AlbumInfo title="Mex-tape - 2024" tracks={MexTapeTracks} />
       </div>
     </div>
   );
