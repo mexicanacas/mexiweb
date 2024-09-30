@@ -4,7 +4,7 @@ import Image from 'next/image';
 export const Header = () => {
   return (
     <header>
-      <nav className="text-secondary fixed z-10 h-header w-screen bg-mexi-black bg-opacity-50 p-4">
+      <nav className="text-secondary fixed top-0 z-10 h-header w-screen bg-mexi-black bg-opacity-50 p-4">
         <ul className="flex h-12 items-center justify-around md:text-4xl">
           <li>
             <Link href="/booking" className="hover:underline">

@@ -2,7 +2,7 @@ import { CreditAndre } from '../core/components/CreditAndre';
 import { Social } from '../home/components/Social';
 
 export const Footer = () => (
-  <footer className="bg-secondary flex w-full items-center justify-between p-8">
+  <footer className="bg-secondary flex w-full flex-wrap items-center justify-between gap-4 p-8">
     <div className="flex flex-col">
       <h2 className="text-lg font-bold">Kontakt oss</h2>
       <ul>

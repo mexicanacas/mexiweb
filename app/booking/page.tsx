@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 const Booking = () => {
   return (
-    <div className="flex min-h-screen items-center md:px-20">
+    <div className="mt-header flex min-h-screen flex-col items-center pb-4 md:mt-0 md:flex-row md:px-20">
       <section className="flex flex-col gap-4 p-4 md:mx-20 md:mt-0">
         <h1 className="text-2xl md:text-4xl">Booking</h1>
         <p>
