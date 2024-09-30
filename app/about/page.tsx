@@ -2,11 +2,9 @@ import { Albums } from './components/Albums';
 import { InfoText } from './components/InfoText';
 
 const About = () => (
-  <div className="justify-around pt-header md:pt-logo-big">
-    <div>
-      <InfoText />
-      <Albums />
-    </div>
+  <div className="flex flex-col items-center pt-header md:pt-logo-big">
+    <InfoText />
+    <Albums />
   </div>
 );
 

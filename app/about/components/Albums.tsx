@@ -15,6 +15,8 @@ const PlataTracks = [
   "Gasolina (feat. Lil' Jake)",
 ];
 
+const MexTapeTracks = ['Pinne for Mexico', 'Taco Shell', 'Samba of Silence'];
+
 export const Albums = () => {
   return (
     <div className="flex flex-col items-center">
