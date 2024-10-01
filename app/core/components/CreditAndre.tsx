@@ -1,5 +1,5 @@
 export const CreditAndre = () => (
-  <span className="text-xs text-stone-400">
+  <span className="text-xs">
     Fotokreditering
     <a href="https://www.instagram.com/andrenesheim/">@andrenesheim</a> /{' '}
     <a href="https://www.instagram.com/saltartmusic/">SALT</a>

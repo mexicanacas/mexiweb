@@ -7,7 +7,7 @@ type Props = Pick<HTMLImageElement, 'src' | 'alt'> &
   };
 
 export const AlbumCover: FC<Props> = ({ src, alt, href, credit }) => (
-  <section className="flex flex-col items-center">
+  <div className="flex flex-col items-center">
     <a href={href}>
       <Image
         src={src}
@@ -17,6 +17,6 @@ export const AlbumCover: FC<Props> = ({ src, alt, href, credit }) => (
         className="shadow-md"
       />
     </a>
-    <p>{credit}</p>
-  </section>
+    <p className="bg-mexi-black bg-opacity-50 ">{credit}</p>
+  </div>
 );
