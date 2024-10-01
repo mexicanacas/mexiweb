@@ -17,6 +17,6 @@ export const AlbumCover: FC<Props> = ({ src, alt, href, credit }) => (
         className="shadow-md"
       />
     </a>
-    <p>{credit}</p>
+    <p className="bg-mexi-black bg-opacity-50 ">{credit}</p>
   </div>
 );

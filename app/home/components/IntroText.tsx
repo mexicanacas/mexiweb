@@ -1,6 +1,6 @@
 export const IntroText = () => (
   <section>
-    <h1 className="mb-4 text-2xl md:text-4xl">Los Mexicanacas!</h1>
+    <h1 className="mb-4 text-2xl font-bold md:text-4xl">Los Mexicanacas</h1>
     <p>
       ¿Hva er dette? tenker du kanskje. Los Mexicanacas ble stiftet en kald,
       våt, varm, vindstille og vindfull kveld 2017 i Trondheim av en gjeng

@@ -11,7 +11,7 @@ const config: Config = {
       backgroundColor: {
         primary: '#EEF2CE',
         secondary: '#8FA690',
-        'mexi-black': '#101010',
+        'mexi-black': '#020D05',
       },
       textColor: {
         primary: '#01261C',
