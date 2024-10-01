@@ -20,7 +20,7 @@ export const ConcertPromo = () => (
       deg og dine inn i vårnatta. Så har du også en god grunn til å endelig
       kaste juletreet inn i hagen til naboen.
     </p>
-    <p>¡ARRIBA! 🪇🪇🪇</p>
+    <p>¡ARRIBA!</p>
     <p>
       Etter en kritikersuksess av en smekkfull konsert på SALT i mai, er vi gira
       på å spille opp i et av de heteste lokalene i Oslo med deg, gjengen din,
