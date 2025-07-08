@@ -4,19 +4,29 @@ export const Social = () => {
       <a
         target="_blank"
         href="https://www.instagram.com/mexicanacas?igsh=b3B5N3ZycnI0YzBx"
+        className="hover:text-primary/80"
       >
         <i className="fa-brands fa-instagram" />
       </a>
       <a
         target="_blank"
         href="https://open.spotify.com/artist/2I4RX8u3uyBXG0kxvhzLui?si=AULMUxW9SGeEl_sQCOWy8Q"
+        className="hover:text-primary/80"
       >
         <i className="fa-brands fa-spotify" />
       </a>
-      <a target="_blank" href="https://www.facebook.com/losmexicanacas">
+      <a
+        target="_blank"
+        href="https://www.facebook.com/losmexicanacas"
+        className="hover:text-primary/80"
+      >
         <i className="fa-brands fa-facebook-f" />
       </a>
-      <a target="_blank" href="mailto:taco@mexi.no">
+      <a
+        target="_blank"
+        href="mailto:booking@mexi.no"
+        className="hover:text-primary/80"
+      >
         <i className="fa-solid fa-envelope" />
       </a>
     </nav>
