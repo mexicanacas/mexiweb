@@ -5,32 +5,37 @@ const Booking = () => {
   return (
     <>
       <BackgroundImage alt="Mexicanacas" src="/booking-image.jpg" />
-      <div className="text-secondary mt-header flex min-h-screen flex-col items-center pb-4 md:mt-0 md:flex-row md:px-20">
+      <div className="mt-header flex min-h-screen flex-col items-center pb-4 text-secondary md:mt-0 md:flex-row md:px-20">
         <section className="mx-auto flex max-w-screen-lg flex-col gap-4 bg-mexi-black bg-opacity-50 p-4 md:mt-0">
           <h1 className="text-2xl md:text-4xl">Booking</h1>
           <p>
-            De siste årene har Los Mexicanacas spilt på bryllup, firmafester,
-            bursdager og konferanser. Vi er sultne på mer, da vi sparer opp til
-            den store Mexico-turnéen en gang i en lys fremtid.
+            Los Mexicanacas er bandet som spiller opp til fest hvor som helst og
+            for hvem som helst! Vi spiller i bryllup og bursdager, på
+            firmafester og store konferanser. Ingen scene er verken for liten
+            eller stor for oss.
           </p>
           <p>
-            Vi er ca. 30 aktive medlemmer, og kan spille alt fra kvintetter (5
-            personer) til fullt band / orkester. På de fleste spilleoppdrag er
-            vi ca. 9 - 14 deltakere. Vanligvis er vi et pop-up-band med trådløse
-            forsterkere, og spiller i typisk 15 - 20 minutter, ofte for å sparke
-            i gang en fest. Andre ganger har vi full lydprøve med konsert-rigg.
+            Vi er i dag rundt 30 aktive medlemmer, og kan stille opp som alt fra
+            kvintetter (5 personer) til fullt band &ndash; men på de fleste
+            spilleoppdrag er vi cirka 12 deltakere. <br />
+            Som oftest dukker vi opp som et pop-up-band med egne trådløse
+            forsterkere, og spiller i typisk 20 minutter, for å sparke i gang en
+            fest. Andre ganger har vi et lengre konsertsett med lydprøve i
+            forkant.
           </p>
           <p>
+            Uansett, så er vi fleksible og har lang erfaring med å tilpasse oss
+            ditt arrangement og deres ønsker. <br />
             Kontakt oss på{' '}
-            <a className="underline" href="mailto:oslo@mexi.no">
-              oslo@mexi.no
+            <a
+              href="mailto:booking@mexi.no"
+              className="underline hover:text-secondary/80"
+            >
+              booking@mexi.no
             </a>{' '}
-            eller{' '}
-            <a className="underline" href="mailto:trondheim@mexi.no">
-              trondheim@mexi.no
-            </a>{' '}
-            avhengig av hvor oppdraget finner sted.
+            for et uforpliktende tilbud eller en prat om ditt neste event!
           </p>
+          <p>Vi gleder oss til å høre fra deg 🎉</p>
         </section>
       </div>
     </>
