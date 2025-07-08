@@ -3,6 +3,7 @@ export const Social = () => {
     <nav className="flex justify-around gap-4 text-4xl">
       <a
         target="_blank"
+        rel="noopener noreferrer"
         href="https://www.instagram.com/mexicanacas?igsh=b3B5N3ZycnI0YzBx"
         className="hover:text-primary/80"
       >
@@ -10,6 +11,7 @@ export const Social = () => {
       </a>
       <a
         target="_blank"
+        rel="noopener noreferrer"
         href="https://open.spotify.com/artist/2I4RX8u3uyBXG0kxvhzLui?si=AULMUxW9SGeEl_sQCOWy8Q"
         className="hover:text-primary/80"
       >
@@ -17,6 +19,7 @@ export const Social = () => {
       </a>
       <a
         target="_blank"
+        rel="noopener noreferrer"
         href="https://www.facebook.com/losmexicanacas"
         className="hover:text-primary/80"
       >
