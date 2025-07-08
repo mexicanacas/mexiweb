@@ -1,5 +1,14 @@
 import Image from 'next/image';
 import { BackgroundImage } from '../core/components/BackgroundImage';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Booking | Los Mexicanacas',
+  description:
+    'Book Los Mexicanacas for ditt neste arrangement! Vi spiller på bryllup, firmafester, bursdager og konferanser. Vi sparker i gang festen din og lager god stemning på alle typer arrangementer.',
+  keywords:
+    'festband, bryllup musikk, firmafest underholdning, bursdagsband, konferanse musikk, party band Norge, live musikk arrangement, pop-up band, sommerfest underholdning, jobbfest band, julebord musikk, event band booking, mariachi band Norge, firmaevent, bedriftsarrangement, teambuilding musikk, underholdning til firmafest, musikk til kickoff, band til sommerfest bedrift, band til julebord bedrift, bedriftsfest underholdning, eventbyrå musikk, live musikk bedrift',
+};
 
 const Booking = () => {
   return (

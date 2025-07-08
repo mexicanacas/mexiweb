@@ -4,6 +4,13 @@ import { PromoVideo } from './components/PromoVideo';
 import { ConcertPromo } from './components/ConcertPromo';
 import Image from 'next/image';
 import { IntroText } from './components/IntroText';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Hjem | Los Mexicanacas',
+  description:
+    'Los Mexicanacas er et festband som spiller i bryllup, firmafester, bursdager og alle andre typer arrangementer. Se bilder, videoer og kontakt oss for booking!',
+};
 
 export default function Home() {
   return (
