@@ -2,36 +2,43 @@ export const ConcertPromo = () => (
   <section className="flex flex-col gap-4">
     <h2 className="text-2xl font-semibold">Konsert</h2>
     <p>
-      Los Mexicanacas til Vulkan Arena den 8.februar 2025! Kjøp billetter på
+      Los Mexicanacas til Rockefeller den 30. mai 2026! Kjøp billetter på
       ticketmaster her:
       <a
         target="_blank"
-        href="https://www.ticketmaster.no/event/750057"
+        href="https://www.ticketmaster.no/event/los-mexicanacas-billetter/455694836"
         className="inline-block underline"
       >
-        https://www.ticketmaster.no/event/750057
+        https://www.ticketmaster.no/event/los-mexicanacas-billetter/455694836
       </a>
     </p>
     <p>
-      Senoritas, senores y etceteras! Pust lettet ut; Jula varer helt til lørdag
-      8. februar. Da er det atter en konge klart for el grande fiesta med Los
-      Mexicanacas! Et av Nordens beste, grandeste, strammeste og varmeste
-      undergrunns latino fusion-band finner frem streng og messing, og spiller
-      deg og dine inn i vårnatta. Så har du også en god grunn til å endelig
-      kaste juletreet inn i hagen til naboen.
-    </p>
-    <p>¡ARRIBA!</p>
-    <p>
-      Etter en kritikersuksess av en smekkfull konsert på SALT i mai, er vi gira
-      på å spille opp i et av de heteste lokalene i Oslo med deg, gjengen din,
-      tanta di og kusine Agathe. Det blir sang, spill, pinata, dans og ikke
-      minst prisvinnende stemning.
+      Los Mexicanacas inviterer til fest på Rockefeller lørdag 30. mai!
+      Hjertelig velkommen til en verden av fiesta, hvor alt du har lært på
+      Duolingo kommer til nytte (hvis du har hatt spansk, portugisisk eller
+      trøndersk)!
     </p>
     <p>
-      Kom som du er, som du var, eller som du skulle ønske å være, ta med en
-      bekjent, og opplev latinomusikk i både norsk og mindre norsk drakt fra
-      aller øverste hylle. Kom og fest med oss! Vi ser fram til å se nettopp DEG
-      i publikum!
+      Los Mexicanacas er et prisvinnende band som spiller latinsk musikk med
+      Nordens varmeste, grandeste og strammeste undergrunns
+      latino-fusion-orkester finner frem strenger og messing, og spiller deg og
+      dine til et varmere klima. Opplev den prisvinnende stemningen i
+      krysningspunktet mellom slagere fra hele verden og latinske rytmer, mens
+      festen foregår både i publikum og på scenen.
+    </p>
+    <p>
+      «Det var få som kjente til Los Mexicanacas før Slottsfjellfestivalen.
+      Fredag ble de bandet alle snakket om.» – Tønsbergs Blad
+    </p>
+    <p>«Beste med hele Slottsfjell.» – Gen Z-person</p>
+    <p>«Delte ut tequila på Oslo maraton.» – NRK</p>
+    <p>
+      Det kan hende at du stiller deg selv følgende spørsmål: ¿Hvem (og hva?) er
+      egentlig dette? Los Mexicanacas ble stiftet av en gjeng overivrige
+      studenter som ikke fikk nok musikk av å synge i kor. Fiesta-markedet var
+      skrint, så vi tok ansvar. Noen måtte lage stemningen. Siden har vi spilt
+      landet rundt, med konserter på festivaler, konferanser, fester og i
+      bursdagen til faren til en kompis – for både én og to flasker tequila!
     </p>
   </section>
 );
