@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { BackgroundImage } from '../core/components/BackgroundImage';
 import { Metadata } from 'next';
 
@@ -14,8 +13,8 @@ const Booking = () => {
   return (
     <>
       <BackgroundImage alt="Mexicanacas" src="/booking-image.jpg" />
-      <div className="mt-header flex min-h-screen flex-col items-center pb-4 text-secondary md:mt-0 md:flex-row md:px-20">
-        <section className="mx-auto flex max-w-screen-lg flex-col gap-4 bg-mexi-black bg-opacity-50 p-4 md:mt-0">
+      <div className="mt-header text-secondary flex min-h-screen flex-col items-center pb-4 md:mt-0 md:flex-row md:px-20">
+        <section className="bg-mexi-black bg-opacity-50 mx-auto flex max-w-5xl flex-col gap-4 p-4 md:mt-0">
           <h1 className="text-2xl md:text-4xl">Booking</h1>
           <p>
             Los Mexicanacas er bandet som spiller opp til fest hvor som helst og
@@ -38,7 +37,7 @@ const Booking = () => {
             Kontakt oss på{' '}
             <a
               href="mailto:booking@mexi.no"
-              className="underline hover:text-secondary/80"
+              className="hover:text-secondary/80 underline"
             >
               booking@mexi.no
             </a>{' '}
