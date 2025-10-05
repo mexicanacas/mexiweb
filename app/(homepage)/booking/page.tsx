@@ -14,7 +14,7 @@ const Booking = () => {
     <>
       <BackgroundImage alt="Mexicanacas" src="/booking-image.jpg" />
       <div className="mt-header flex min-h-screen flex-col items-center pb-4 text-secondary md:mt-0 md:flex-row md:px-20">
-        <section className="mx-auto flex max-w-screen-lg flex-col gap-4 bg-mexi-black bg-opacity-50 p-4 md:mt-0">
+        <section className="mx-auto flex max-w-(--breakpoint-lg) flex-col gap-4 bg-mexi-black bg-opacity-50 p-4 md:mt-0">
           <h1 className="text-2xl md:text-4xl">Booking</h1>
           <p>
             Los Mexicanacas er bandet som spiller opp til fest hvor som helst og

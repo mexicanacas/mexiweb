@@ -28,7 +28,7 @@ export default function Home() {
           sizes="100%"
         />
       </div>
-      <div className="flex w-full max-w-screen-md flex-col gap-8 p-12">
+      <div className="flex w-full max-w-(--breakpoint-md) flex-col gap-8 p-12">
         <IntroText />
         <ConcertPromo />
         <Social />
