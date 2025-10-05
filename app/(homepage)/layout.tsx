@@ -2,7 +2,6 @@
 import React, { FC, ReactNode } from 'react';
 
 import '../globals.css';
-
 import { Header } from './header/Header';
 import { Footer } from './footer/Footer';
 
