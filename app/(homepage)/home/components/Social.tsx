@@ -1,3 +1,11 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faFacebook,
+  faInstagram,
+  faSpotify,
+} from '@fortawesome/free-brands-svg-icons';
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+
 export const Social = () => {
   return (
     <nav className="flex justify-around gap-4 text-4xl">
@@ -8,7 +16,7 @@ export const Social = () => {
         href="https://www.instagram.com/mexicanacas?igsh=b3B5N3ZycnI0YzBx"
         className="hover:text-primary/80"
       >
-        <i className="fa-brands fa-instagram" />
+        <FontAwesomeIcon icon={faInstagram} />
       </a>
       <a
         target="_blank"
@@ -17,7 +25,7 @@ export const Social = () => {
         href="https://open.spotify.com/artist/2I4RX8u3uyBXG0kxvhzLui?si=AULMUxW9SGeEl_sQCOWy8Q"
         className="hover:text-primary/80"
       >
-        <i className="fa-brands fa-spotify" />
+        <FontAwesomeIcon icon={faSpotify} />
       </a>
       <a
         target="_blank"
@@ -26,10 +34,10 @@ export const Social = () => {
         href="https://www.facebook.com/losmexicanacas"
         className="hover:text-primary/80"
       >
-        <i className="fa-brands fa-facebook-f" />
+        <FontAwesomeIcon icon={faFacebook} />
       </a>
       <a href="mailto:booking@mexi.no" className="hover:text-primary/80">
-        <i className="fa-solid fa-envelope" />
+        <FontAwesomeIcon icon={faEnvelope} />
       </a>
     </nav>
   );
