@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { BackgroundImage } from '../core/components/BackgroundImage';
 import { Metadata } from 'next';
 
