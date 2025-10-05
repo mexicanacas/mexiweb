@@ -1,4 +1,4 @@
-import Home from './home/page';
+import Home from './/home/page';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
