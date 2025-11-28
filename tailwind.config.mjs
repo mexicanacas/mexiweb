@@ -7,6 +7,7 @@ export default {
         primary: '#eef2ce',
         secondary: '#8fa690',
         'mexi-black': '#020d05',
+        'mexi-green': '#8fa690',
       },
       textColor: {
         primary: '#01261c',

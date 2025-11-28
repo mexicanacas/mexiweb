@@ -3,27 +3,34 @@
 ---
 
 <header>
-  <nav class="text-secondary fixed top-0 z-10 h-header w-screen bg-mexi-black bg-opacity-50 p-4">
-    <ul class="flex h-12 items-center justify-around md:text-4xl">
+  <nav
+    class="fixed top-0 z-10 h-header w-screen bg-mexi-black bg-opacity-50 p-4 text-secondary shadow-lg backdrop-blur-sm"
+  >
+    <ul
+      class="mx-auto flex h-12 max-w-7xl items-center justify-start gap-8 px-4"
+    >
       <li>
-        <a href="/booking" class="hover:underline">Booking</a>
-      </li>
-      <li>
-        <a
-          href="/"
-          class="relative block h-header w-auto md:top-12 md:h-logo-big"
-        >
+        <a href="/" class="block h-12">
           <img
             src="/logo.png"
             alt="Logo"
             width="500"
             height="500"
-            class="aspect-auto h-full w-auto"
+            class="h-full w-auto drop-shadow-lg"
           />
         </a>
       </li>
-      <li>
-        <a href="/about" class="hover:underline">Om oss</a>
+      <li class="flex gap-6 text-lg font-semibold md:gap-8 md:text-2xl">
+        <a href="/" class="transition-colors hover:text-mexi-green"> Hjem </a>
+        <a href="/booking" class="transition-colors hover:text-mexi-green"
+          >Booking</a
+        >
+        <a href="/concerts" class="transition-colors hover:text-mexi-green"
+          >Konserter</a
+        >
+        <a href="/about" class="transition-colors hover:text-mexi-green"
+          >Om oss</a
+        >
       </li>
     </ul>
   </nav>
