@@ -1,0 +1,17 @@
+---
+interface Props {
+  src: string;
+  alt: string;
+  href: string;
+  credit: string;
+}
+
+const { src, alt, href, credit } = Astro.props;
+---
+
+<div class="flex flex-col items-center">
+  <a href={href}>
+    <img src={src} alt={alt} height="250" width="250" class="shadow-md" />
+  </a>
+  <p class="bg-mexi-black bg-opacity-50">{credit}</p>
+</div>
