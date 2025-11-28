@@ -1,0 +1,6 @@
+{
+  "/studio/[[...tool]]/page": "app/studio/[[...tool]]/page.js",
+  "/(homepage)/booking/page": "app/(homepage)/booking/page.js",
+  "/(homepage)/about/page": "app/(homepage)/about/page.js",
+  "/(homepage)/page": "app/(homepage)/page.js"
+}

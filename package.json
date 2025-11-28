@@ -1,39 +1,39 @@
 {
-  "name": "nextjs",
+  "name": "mexiweb",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "dev": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro",
     "lint": "eslint ."
   },
   "dependencies": {
+    "@astrojs/check": "^0.9.6",
+    "@astrojs/react": "^3.6.2",
+    "@astrojs/tailwind": "^5.1.0",
+    "@sanity/client": "^6.23.0",
     "@sanity/icons": "^3.7.4",
     "@sanity/image-url": "^1.2.0",
     "@sanity/vision": "^4.10.2",
-    "@tailwindcss/postcss": "^4.1.14",
-    "global": "^4.4.0",
-    "next": "^15.5.4",
-    "next-sanity": "^11.4.2",
-    "react": "^19",
-    "react-dom": "^19",
+    "astro": "^4.16.18",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "react-youtube": "^10.1.0",
     "sanity": "^4.10.2",
-    "sharp": "0.34.4",
-    "styled-components": "^6.1.19",
-    "tailwindcss": "^4.1.14"
+    "tailwindcss": "^3.4.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",
     "@types/node": "^24",
-    "@types/react": "^19.2.0",
-    "@types/react-dom": "^19",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
     "eslint": "^9.37.0",
-    "eslint-config-next": "15.5.4",
-    "postcss": "^8",
     "prettier": "^3.6.2",
+    "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-tailwindcss": "^0.6.14",
-    "typescript": "^5"
+    "typescript": "^5.9.3"
   }
 }

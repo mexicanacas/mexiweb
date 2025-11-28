@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import IntroText from '../components/IntroText.astro';
+import ConcertPromo from '../components/ConcertPromo.astro';
+import Social from '../components/Social.astro';
+import YouTubeEmbed from '../components/YouTubeEmbed.astro';
+---
+
+<BaseLayout
+  title="Los Mexicanacas | Norges grandeste og strammeste partyband!"
+  description="Vi er Los Mexicanacas og leverer live musikk, god stemning og fiestagaranti til alle typer arrangementer, fra bryllup og firmafester til bursdager og konserter."
+>
+  <div class="flex flex-col items-center">
+    <div class="relative h-fit w-full">
+      <img
+        alt="Mexicanacas"
+        src="/homepage-image.jpg"
+        width="100"
+        height="100"
+        style="width: 100%;"
+      />
+    </div>
+    <div class="flex w-full max-w-3xl flex-col gap-8 p-12">
+      <IntroText />
+      <ConcertPromo />
+      <Social />
+    </div>
+    <YouTubeEmbed videoId="l168qWtKah0" title="Los Mexicanacas Promo Video" />
+  </div>
+</BaseLayout>
