@@ -1,6 +1,27 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  /* Base colors - used for borders, etc. */
+  --color-primary: #eef2ce;
+  --color-secondary: #8fa690;
+  --color-mexi-black: #020d05;
+  --color-mexi-green: #8fa690;
+
+  /* Custom spacing */
+  --spacing-header: 80px;
+  --spacing-logo-big: 160px;
+}
+
+/* Override text color utilities to use the text-specific values from original config */
+@layer utilities {
+  .text-primary {
+    color: #01261c;
+  }
+
+  .text-secondary {
+    color: #eef2ce;
+  }
+}
 
 /*
   The default border color has changed to `currentcolor` in Tailwind CSS v4,
@@ -11,6 +32,7 @@
   color utility to any element that depends on these defaults.
 */
 @layer base {
+
   *,
   ::after,
   ::before,
@@ -18,15 +40,10 @@
   ::file-selector-button {
     border-color: theme('colors.gray.200');
   }
-}
 
-:root {
-  --foreground-rgb: 255, 255, 255;
-  --background-color: #eef2ce;
-}
-
-body {
-  color: #01261c;
-  overflow-x: hidden;
-  background-color: var(--background-color);
+  body {
+    color: #01261c;
+    overflow-x: hidden;
+    background-color: #eef2ce;
+  }
 }
