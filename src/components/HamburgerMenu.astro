@@ -29,15 +29,15 @@ const { links } = Astro.props;
   <!-- Mobile Menu Dropdown -->
   <div
     id="mobile-menu"
-    class="bg-mexi-green fixed top-20 right-0 left-0 hidden shadow-lg"
+    class="bg-mexi-green absolute top-full right-0 left-0 hidden shadow-lg"
   >
     <ul class="flex flex-col">
       {
         links.map((link) => (
-          <li class="border-mexi-black border-opacity-20 border-b">
+          <li class="border-mexi-black/20 border-b">
             <a
               href={link.href}
-              class="text-mexi-cream hover:bg-mexi-black hover:bg-opacity-20 block px-6 py-4 text-lg font-semibold transition-colors"
+              class="text-mexi-cream hover:bg-mexi-black/20 block px-6 py-4 text-lg font-semibold transition-colors"
             >
               {link.label}
             </a>

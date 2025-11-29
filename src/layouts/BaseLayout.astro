@@ -23,9 +23,11 @@ const { title, description, keywords } = Astro.props;
     <title>{title}</title>
     <ClientRouter />
   </head>
-  <body class="bg-mexi-cream text-mexi-dark overflow-x-hidden">
+  <body
+    class="bg-mexi-cream text-mexi-dark flex min-h-dvh flex-col overflow-x-hidden"
+  >
     <Header />
-    <main class="min-h-screen min-w-screen">
+    <main class="flex-1 pt-20">
       <slot />
     </main>
     <Footer />

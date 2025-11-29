@@ -35,41 +35,37 @@ const previousConcerts = [
     alt="Bilde fra konserten på Vulkan arena"
     src="/concerts-image.jpg"
   />
-  <div class="text-mexi-cream flex flex-col items-center gap-12 pt-20 pb-16">
-    <div class="w-full max-w-4xl px-6 md:px-12">
-      <div class="mb-12 text-center">
-        <h1 class="mb-4 text-4xl font-bold md:text-5xl">Konserter</h1>
-        <p class="text-lg">
-          Opplev Los Mexicanacas live! Her finner du alle våre kommende og
-          tidligere konserter.
-        </p>
+  <div class="text-mexi-cream mx-auto w-full max-w-4xl px-6 py-12 md:px-12">
+    <header class="mb-12 text-center">
+      <h1 class="mb-4 text-4xl font-bold md:text-5xl">Konserter</h1>
+      <p class="text-lg">
+        Opplev Los Mexicanacas live! Her finner du alle våre kommende og
+        tidligere konserter.
+      </p>
+    </header>
+
+    <!-- Upcoming Concerts Section -->
+    <section class="mb-16">
+      <div class="mb-8">
+        <h2 class="mb-2 flex items-center gap-3 text-3xl font-bold">
+          <CalendarCheck class="text-mexi-green size-8" />
+          Kommende konserter
+        </h2>
+        <p>Bli med oss på en uforglemmelig kveld med fiesta og god stemning!</p>
       </div>
+      <ConcertList concerts={upcomingConcerts} type="upcoming" />
+    </section>
 
-      <!-- Upcoming Concerts Section -->
-      <section class="mb-16">
-        <div class="mb-8">
-          <h2 class="mb-2 flex items-center gap-3 text-3xl font-bold">
-            <CalendarCheck class="text-mexi-green size-8" />
-            Kommende konserter
-          </h2>
-          <p>
-            Bli med oss på en uforglemmelig kveld med fiesta og god stemning!
-          </p>
-        </div>
-        <ConcertList concerts={upcomingConcerts} type="upcoming" />
-      </section>
-
-      <!-- Previous Concerts Section -->
-      <section>
-        <div class="mb-8">
-          <h2 class="mb-2 flex items-center gap-3 text-3xl font-bold">
-            <History class="text-mexi-green size-8" />
-            Tidligere konserter
-          </h2>
-          <p>Se hvor Los Mexicanacas har spredt fiesta tidligere.</p>
-        </div>
-        <ConcertList concerts={previousConcerts} type="previous" />
-      </section>
-    </div>
+    <!-- Previous Concerts Section -->
+    <section>
+      <div class="mb-8">
+        <h2 class="mb-2 flex items-center gap-3 text-3xl font-bold">
+          <History class="text-mexi-green size-8" />
+          Tidligere konserter
+        </h2>
+        <p>Se hvor Los Mexicanacas har spredt fiesta tidligere.</p>
+      </div>
+      <ConcertList concerts={previousConcerts} type="previous" />
+    </section>
   </div>
 </BaseLayout>

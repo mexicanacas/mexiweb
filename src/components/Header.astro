@@ -10,44 +10,34 @@ const navLinks = [
 ];
 ---
 
-<header>
+<header
+  class="bg-mexi-black text-mexi-cream fixed top-0 right-0 left-0 z-10 shadow-lg"
+>
   <nav
-    class="bg-mexi-black bg-opacity-50 text-mexi-cream fixed top-0 z-10 h-20 w-screen p-4 shadow-lg backdrop-blur-sm"
+    class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 md:justify-start md:gap-8"
   >
-    <div
-      class="mx-auto flex h-12 max-w-7xl items-center justify-between px-4 md:justify-start md:gap-8"
-    >
-      <!-- Logo -->
-      <a href="/" class="block h-12">
-        <img
-          src="/logo.png"
-          alt="Logo"
-          width="500"
-          height="500"
-          class="h-full w-auto drop-shadow-lg"
-        />
-      </a>
+    <a href="/">
+      <img
+        src="/logo.png"
+        alt="Logo"
+        width="500"
+        height="500"
+        class="h-12 w-auto drop-shadow-lg"
+      />
+    </a>
 
-      <!-- Desktop Navigation -->
-      <ul
-        class="hidden gap-6 text-lg font-semibold md:flex md:gap-8 md:text-2xl"
-      >
-        {
-          navLinks.map((link) => (
-            <li>
-              <a
-                href={link.href}
-                class="hover:text-mexi-green transition-colors"
-              >
-                {link.label}
-              </a>
-            </li>
-          ))
-        }
-      </ul>
+    <ul class="hidden gap-6 text-lg font-semibold md:flex md:gap-8 md:text-2xl">
+      {
+        navLinks.map((link) => (
+          <li>
+            <a href={link.href} class="hover:text-mexi-green transition-colors">
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
 
-      <!-- Mobile Hamburger Menu -->
-      <HamburgerMenu links={navLinks} />
-    </div>
+    <HamburgerMenu links={navLinks} />
   </nav>
 </header>
