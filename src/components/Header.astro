@@ -1,7 +1,6 @@
 ---
-import { Image } from 'astro:assets';
 import HamburgerMenu from './HamburgerMenu.astro';
-import logo from '../assets/images/logo.png';
+import Logo from '../assets/mexi-chili.svg';
 
 const navLinks = [
 	{ href: '/', label: 'Hjem' },
@@ -15,8 +14,8 @@ const navLinks = [
 	<nav
 		class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 md:justify-start md:gap-8"
 	>
-		<a href="/">
-			<Image src={logo} alt="Los Mexicanacas logo" class="h-12 w-auto drop-shadow-lg" />
+		<a href="/" class="px-2" aria-label="Hjem">
+			<Logo class="h-12 w-auto" aria-hidden="true" />
 		</a>
 
 		<ul class="hidden gap-6 text-lg font-semibold md:flex md:gap-8 md:text-2xl">
