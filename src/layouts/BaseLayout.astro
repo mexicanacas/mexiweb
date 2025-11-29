@@ -1,5 +1,5 @@
 ---
-import { ViewTransitions } from 'astro:transitions';
+import { ClientRouter } from 'astro:transitions';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
@@ -21,7 +21,7 @@ const { title, description, keywords } = Astro.props;
     <meta name="description" content={description} />
     {keywords && <meta name="keywords" content={keywords} />}
     <title>{title}</title>
-    <ViewTransitions />
+    <ClientRouter />
     <script
       is:inline
       src="https://kit.fontawesome.com/701c0b74f9.js"
