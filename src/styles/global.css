@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #eef2ce;
-  --color-secondary: #8fa690;
   --color-mexi-black: #020d05;
   --color-mexi-green: #8fa690;
+  --color-mexi-dark: #01261c;
+  --color-mexi-cream: #eef2ce;
 }
