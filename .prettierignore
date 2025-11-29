@@ -1,9 +1,17 @@
-# Package Managers
-package-lock.json
+# Ignore artifacts:
+dist
+.astro
+
+# Standard
+**/.git
+**/.svn
+**/.hg
+**/node_modules
+
+# lockfiles
 pnpm-lock.yaml
 yarn.lock
-bun.lock
-bun.lockb
+package-lock.json
 
-# Miscellaneous
-/static/
+# Ignore build files
+.vercel
