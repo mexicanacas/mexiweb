@@ -16,28 +16,28 @@ const { links } = Astro.props;
     aria-expanded="false"
   >
     <span
-      class="hamburger-line block h-0.5 w-6 bg-secondary transition-all duration-300"
+      class="hamburger-line bg-secondary block h-0.5 w-6 transition-all duration-300"
     ></span>
     <span
-      class="hamburger-line block h-0.5 w-6 bg-secondary transition-all duration-300"
+      class="hamburger-line bg-secondary block h-0.5 w-6 transition-all duration-300"
     ></span>
     <span
-      class="hamburger-line block h-0.5 w-6 bg-secondary transition-all duration-300"
+      class="hamburger-line bg-secondary block h-0.5 w-6 transition-all duration-300"
     ></span>
   </button>
 
   <!-- Mobile Menu Dropdown -->
   <div
     id="mobile-menu"
-    class="fixed left-0 right-0 top-header hidden bg-mexi-green shadow-lg"
+    class="bg-mexi-green fixed top-20 right-0 left-0 hidden shadow-lg"
   >
     <ul class="flex flex-col">
       {
         links.map((link) => (
-          <li class="border-b border-mexi-black border-opacity-20">
+          <li class="border-mexi-black border-opacity-20 border-b">
             <a
               href={link.href}
-              class="block px-6 py-4 text-lg font-semibold text-secondary transition-colors hover:bg-mexi-black hover:bg-opacity-20"
+              class="text-secondary hover:bg-mexi-black hover:bg-opacity-20 block px-6 py-4 text-lg font-semibold transition-colors"
             >
               {link.label}
             </a>
@@ -49,36 +49,36 @@ const { links } = Astro.props;
 </div>
 
 <script>
-  const hamburgerButton = document.getElementById('hamburger-button');
-  const mobileMenu = document.getElementById('mobile-menu');
-  const hamburgerLines = document.querySelectorAll('.hamburger-line');
+  const hamburgerButton = document.getElementById("hamburger-button");
+  const mobileMenu = document.getElementById("mobile-menu");
+  const hamburgerLines = document.querySelectorAll(".hamburger-line");
 
   function toggleMenu() {
     const isExpanded =
-      hamburgerButton?.getAttribute('aria-expanded') === 'true';
+      hamburgerButton?.getAttribute("aria-expanded") === "true";
 
-    hamburgerButton?.setAttribute('aria-expanded', String(!isExpanded));
-    mobileMenu?.classList.toggle('hidden');
+    hamburgerButton?.setAttribute("aria-expanded", String(!isExpanded));
+    mobileMenu?.classList.toggle("hidden");
 
     // Animate hamburger to X
     if (!isExpanded) {
-      hamburgerLines[0]?.classList.add('rotate-45', 'translate-y-2');
-      hamburgerLines[1]?.classList.add('opacity-0');
-      hamburgerLines[2]?.classList.add('-rotate-45', '-translate-y-2');
+      hamburgerLines[0]?.classList.add("rotate-45", "translate-y-2");
+      hamburgerLines[1]?.classList.add("opacity-0");
+      hamburgerLines[2]?.classList.add("-rotate-45", "-translate-y-2");
     } else {
-      hamburgerLines[0]?.classList.remove('rotate-45', 'translate-y-2');
-      hamburgerLines[1]?.classList.remove('opacity-0');
-      hamburgerLines[2]?.classList.remove('-rotate-45', '-translate-y-2');
+      hamburgerLines[0]?.classList.remove("rotate-45", "translate-y-2");
+      hamburgerLines[1]?.classList.remove("opacity-0");
+      hamburgerLines[2]?.classList.remove("-rotate-45", "-translate-y-2");
     }
   }
 
-  hamburgerButton?.addEventListener('click', toggleMenu);
+  hamburgerButton?.addEventListener("click", toggleMenu);
 
   // Close menu when clicking a link
-  const menuLinks = mobileMenu?.querySelectorAll('a');
+  const menuLinks = mobileMenu?.querySelectorAll("a");
   menuLinks?.forEach((link) => {
-    link.addEventListener('click', () => {
-      if (!mobileMenu?.classList.contains('hidden')) {
+    link.addEventListener("click", () => {
+      if (!mobileMenu?.classList.contains("hidden")) {
         toggleMenu();
       }
     });

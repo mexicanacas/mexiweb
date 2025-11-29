@@ -1,27 +1,29 @@
 ---
-import AlbumCover from './AlbumCover.astro';
-import AlbumInfo from './AlbumInfo.astro';
+import AlbumCover from "./AlbumCover.astro";
+import AlbumInfo from "./AlbumInfo.astro";
 
 const ElPeTracks = [
-  'Yo Soy El Aventurero',
+  "Yo Soy El Aventurero",
   "Livin' la Vida Loca",
-  '¡Aserejito!',
+  "¡Aserejito!",
 ];
 
-const DiegoTracks = ['Diego Licarno (Viva Mæxico)'];
+const DiegoTracks = ["Diego Licarno (Viva Mæxico)"];
 
 const PlataTracks = [
-  'Fireball (feat. Flo Ryan)',
-  'Yo No Sé',
+  "Fireball (feat. Flo Ryan)",
+  "Yo No Sé",
   "Gasolina (feat. Lil' Jake)",
 ];
 
-const MexTapeTracks = ['Pinne for Mexico', 'Taco Shell', 'Samba of Silence'];
+const MexTapeTracks = ["Pinne for Mexico", "Taco Shell", "Samba of Silence"];
 ---
 
 <section class="flex flex-col items-center">
   <h2 class="bg-mexi-black bg-opacity-50 text-4xl">Utgivelser</h2>
-  <div class="grid grid-cols-1 items-center justify-items-center gap-4 p-4 md:grid-cols-2">
+  <div
+    class="grid grid-cols-1 items-center justify-items-center gap-4 p-4 md:grid-cols-2"
+  >
     <AlbumCover
       src="/el-pe-cover.jpg"
       alt="Cover for utgivelsen El Pé"
