@@ -1,4 +1,5 @@
 ---
+import { Mail } from "@lucide/astro";
 import CreditAndre from "./CreditAndre.astro";
 import Social from "./Social.astro";
 ---
@@ -7,17 +8,13 @@ import Social from "./Social.astro";
   class="bg-secondary flex w-full flex-wrap items-center justify-between gap-4 p-8"
 >
   <div class="flex flex-col">
-    <h2 class="text-lg font-bold">Kontakt oss</h2>
-    <ul>
-      <li>
-        <a
-          class="hover:text-primary/80 underline"
-          href="mailto:booking@mexi.no"
-        >
-          booking@mexi.no
-        </a>
-      </li>
-    </ul>
+    <h2 class="flex items-center gap-2 text-lg font-bold">
+      <Mail class="text-mexi-black size-5" />
+      Kontakt oss
+    </h2>
+    <a class="hover:text-primary/80 underline" href="mailto:booking@mexi.no">
+      booking@mexi.no
+    </a>
     <CreditAndre />
   </div>
   <Social />
