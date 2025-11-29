@@ -1,19 +1,20 @@
 ---
-import CreditAndre from './CreditAndre.astro';
+import { Mail } from '@lucide/astro';
 import Social from './Social.astro';
 ---
 
-<footer class="flex w-full flex-wrap items-center justify-between gap-4 bg-secondary p-8">
-  <div class="flex flex-col">
-    <h2 class="text-lg font-bold">Kontakt oss</h2>
-    <ul>
-      <li>
-        <a class="underline hover:text-primary/80" href="mailto:booking@mexi.no">
-          booking@mexi.no
-        </a>
-      </li>
-    </ul>
-    <CreditAndre />
-  </div>
-  <Social />
+<footer class="bg-mexi-green flex w-full flex-wrap items-center justify-between gap-4 p-8">
+	<div class="flex flex-col">
+		<h2 class="flex items-center gap-2 text-lg font-bold">
+			<Mail class="text-mexi-black size-5" />
+			Kontakt oss
+		</h2>
+		<a class="hover:text-mexi-dark/80 underline" href="mailto:booking@mexi.no">booking@mexi.no</a>
+		<span class="text-xs">
+			Fotokreditering
+			<a href="https://www.instagram.com/andrenesheim/">@andrenesheim</a> /
+			<a href="https://www.instagram.com/saltartmusic/">SALT</a>
+		</span>
+	</div>
+	<Social />
 </footer>

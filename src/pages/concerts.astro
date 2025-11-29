@@ -2,75 +2,66 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import BackgroundImage from '../components/BackgroundImage.astro';
 import ConcertList from '../components/ConcertList.astro';
+import { CalendarCheck, History } from '@lucide/astro';
+import concertsImage from '../assets/images/concerts-image.jpg';
 
 // Upcoming concerts data
 const upcomingConcerts = [
-  {
-    date: '30. mai 2026',
-    venue: 'Rockefeller',
-    location: 'Oslo',
-    ticketLink:
-      'https://www.ticketmaster.no/event/los-mexicanacas-billetter/455694836',
-  },
-  // Add more upcoming concerts here
+	{
+		date: '30. mai 2026',
+		venue: 'Rockefeller',
+		location: 'Oslo',
+		ticketLink: 'https://www.ticketmaster.no/event/los-mexicanacas-billetter/455694836'
+	}
+	// Add more upcoming concerts here
 ];
 
 // Previous concerts data
 const previousConcerts = [
-  {
-    date: '11. juli 2025',
-    venue: 'Slottsfjell',
-    location: 'Tønsberg',
-  },
-  // Add more previous concerts here
+	{
+		date: '11. juli 2025',
+		venue: 'Slottsfjell',
+		location: 'Tønsberg'
+	}
+	// Add more previous concerts here
 ];
 ---
 
 <BaseLayout
-  title="Konserter | Los Mexicanacas"
-  description="Se våre kommende konserter og hvor Los Mexicanacas har spilt tidligere. Kjøp billetter til våre forestående show!"
+	title="Konserter | Los Mexicanacas"
+	description="Se våre kommende konserter og hvor Los Mexicanacas har spilt tidligere. Kjøp billetter til våre forestående show!"
 >
-  <BackgroundImage
-    alt="Bilde fra konserten på Vulkan arena"
-    src="/concerts-image.jpg"
-  />
-  <div
-    class="flex flex-col items-center gap-12 pb-16 pt-header text-secondary md:pt-logo-big"
-  >
-    <div class="w-full max-w-4xl px-6 md:px-12">
-      <div class="mb-12 text-center">
-        <h1 class="mb-4 text-4xl font-bold md:text-5xl">Konserter</h1>
-        <p class="text-lg">
-          Opplev Los Mexicanacas live! Her finner du alle våre kommende og
-          tidligere konserter.
-        </p>
-      </div>
+	<BackgroundImage alt="Bilde fra konserten på Vulkan arena" src={concertsImage} />
+	<div class="text-mexi-cream mx-auto w-full max-w-4xl px-6 py-12 md:px-12">
+		<header class="mb-12 text-center">
+			<h1 class="mb-4 text-4xl font-bold md:text-5xl">Konserter</h1>
+			<p class="text-lg">
+				Opplev Los Mexicanacas live! Her finner du alle våre kommende og tidligere konserter.
+			</p>
+		</header>
 
-      <!-- Upcoming Concerts Section -->
-      <section class="mb-16">
-        <div class="mb-8">
-          <h2 class="mb-2 flex items-center gap-3 text-3xl font-bold">
-            <i class="fas fa-calendar-check text-mexi-green"></i>
-            Kommende konserter
-          </h2>
-          <p>
-            Bli med oss på en uforglemmelig kveld med fiesta og god stemning!
-          </p>
-        </div>
-        <ConcertList concerts={upcomingConcerts} type="upcoming" />
-      </section>
+		<!-- Upcoming Concerts Section -->
+		<section class="mb-16">
+			<div class="mb-8">
+				<h2 class="mb-2 flex items-center gap-3 text-3xl font-bold">
+					<CalendarCheck class="text-mexi-green size-8" />
+					Kommende konserter
+				</h2>
+				<p>Bli med oss på en uforglemmelig kveld med fiesta og god stemning!</p>
+			</div>
+			<ConcertList concerts={upcomingConcerts} type="upcoming" />
+		</section>
 
-      <!-- Previous Concerts Section -->
-      <section>
-        <div class="mb-8">
-          <h2 class="mb-2 flex items-center gap-3 text-3xl font-bold">
-            <i class="fas fa-history text-mexi-green"></i>
-            Tidligere konserter
-          </h2>
-          <p>Se hvor Los Mexicanacas har spredt fiesta tidligere.</p>
-        </div>
-        <ConcertList concerts={previousConcerts} type="previous" />
-      </section>
-    </div>
-  </div>
+		<!-- Previous Concerts Section -->
+		<section>
+			<div class="mb-8">
+				<h2 class="mb-2 flex items-center gap-3 text-3xl font-bold">
+					<History class="text-mexi-green size-8" />
+					Tidligere konserter
+				</h2>
+				<p>Se hvor Los Mexicanacas har spredt fiesta tidligere.</p>
+			</div>
+			<ConcertList concerts={previousConcerts} type="previous" />
+		</section>
+	</div>
 </BaseLayout>
