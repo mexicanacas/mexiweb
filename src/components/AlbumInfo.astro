@@ -1,23 +1,21 @@
 ---
 interface Props {
-  title: string;
-  tracks: string[];
+	title: string;
+	tracks: string[];
 }
 
 const { title, tracks } = Astro.props;
 ---
 
-<section
-  class="bg-mexi-black bg-opacity-50 flex flex-col justify-center justify-self-start p-4"
->
-  <h3 class="text-lg font-medium">{title}</h3>
-  <ol>
-    {
-      tracks.map((track) => (
-        <li>
-          <h3>{track}</h3>
-        </li>
-      ))
-    }
-  </ol>
+<section class="bg-mexi-black bg-opacity-50 flex flex-col justify-center justify-self-start p-4">
+	<h3 class="text-lg font-medium">{title}</h3>
+	<ol>
+		{
+			tracks.map((track) => (
+				<li>
+					<h3>{track}</h3>
+				</li>
+			))
+		}
+	</ol>
 </section>

@@ -1,20 +1,18 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import BackgroundImage from "../components/BackgroundImage.astro";
-import InfoText from "../components/InfoText.astro";
-import Albums from "../components/Albums.astro";
-import albumImage from "../assets/images/album-image.jpg";
+import BaseLayout from '../layouts/BaseLayout.astro';
+import BackgroundImage from '../components/BackgroundImage.astro';
+import InfoText from '../components/InfoText.astro';
+import Albums from '../components/Albums.astro';
+import albumImage from '../assets/images/album-image.jpg';
 ---
 
 <BaseLayout
-  title="Om oss | Los Mexicanacas"
-  description="Bli kjent med Los Mexicanacas! Les om bandets historie og våre utgivelser. Se bilder og album fra våre eventyr."
+	title="Om oss | Los Mexicanacas"
+	description="Bli kjent med Los Mexicanacas! Les om bandets historie og våre utgivelser. Se bilder og album fra våre eventyr."
 >
-  <BackgroundImage alt="Los Mexicanacas" src={albumImage} />
-  <div
-    class="text-mexi-cream mx-auto flex max-w-4xl flex-col items-center gap-8 px-6 py-12"
-  >
-    <InfoText />
-    <Albums />
-  </div>
+	<BackgroundImage alt="Los Mexicanacas" src={albumImage} />
+	<div class="text-mexi-cream mx-auto flex max-w-4xl flex-col items-center gap-8 px-6 py-12">
+		<InfoText />
+		<Albums />
+	</div>
 </BaseLayout>

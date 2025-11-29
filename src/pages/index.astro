@@ -1,24 +1,24 @@
 ---
-import { Image } from "astro:assets";
-import BaseLayout from "../layouts/BaseLayout.astro";
-import IntroText from "../components/IntroText.astro";
-import ConcertPromo from "../components/ConcertPromo.astro";
-import Social from "../components/Social.astro";
-import YouTubeEmbed from "../components/YouTubeEmbed.astro";
-import heroImage from "../assets/images/homepage-image.jpg";
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import IntroText from '../components/IntroText.astro';
+import ConcertPromo from '../components/ConcertPromo.astro';
+import Social from '../components/Social.astro';
+import YouTubeEmbed from '../components/YouTubeEmbed.astro';
+import heroImage from '../assets/images/homepage-image.jpg';
 ---
 
 <BaseLayout
-  title="Los Mexicanacas | Norges grandeste og strammeste partyband!"
-  description="Vi er Los Mexicanacas og leverer live musikk, god stemning og fiestagaranti til alle typer arrangementer, fra bryllup og firmafester til bursdager og konserter."
+	title="Los Mexicanacas | Norges grandeste og strammeste partyband!"
+	description="Vi er Los Mexicanacas og leverer live musikk, god stemning og fiestagaranti til alle typer arrangementer, fra bryllup og firmafester til bursdager og konserter."
 >
-  <div class="flex flex-col items-center">
-    <Image src={heroImage} alt="Los Mexicanacas" class="w-full" />
-    <div class="flex w-full max-w-3xl flex-col gap-8 p-12">
-      <IntroText />
-      <ConcertPromo />
-      <Social />
-    </div>
-    <YouTubeEmbed videoId="l168qWtKah0" title="Los Mexicanacas Promo Video" />
-  </div>
+	<div class="flex flex-col items-center">
+		<Image src={heroImage} alt="Los Mexicanacas" class="w-full" />
+		<div class="flex w-full max-w-3xl flex-col gap-8 p-12">
+			<IntroText />
+			<ConcertPromo />
+			<Social />
+		</div>
+		<YouTubeEmbed videoId="l168qWtKah0" title="Los Mexicanacas Promo Video" />
+	</div>
 </BaseLayout>
