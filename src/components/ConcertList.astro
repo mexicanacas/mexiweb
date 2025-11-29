@@ -35,14 +35,14 @@ const { concerts, type } = Astro.props;
               </h3>
               <div class="flex flex-col gap-2 text-gray-800">
                 <p class="flex items-center gap-2">
-                  <CalendarDays class="size-5 text-mexi-green" />
+                  <CalendarDays class="text-mexi-green size-5" />
                   <span class="font-medium">{concert.date}</span>
                   {concert.time && (
                     <span class="ml-2 text-gray-600">• {concert.time}</span>
                   )}
                 </p>
                 <p class="flex items-center gap-2">
-                  <MapPin class="size-5 text-mexi-green" />
+                  <MapPin class="text-mexi-green size-5" />
                   <span class="font-medium">{concert.location}</span>
                 </p>
               </div>
