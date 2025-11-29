@@ -1,6 +1,9 @@
 ---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
 interface Props {
-  src: string;
+  src: ImageMetadata;
   alt: string;
   href: string;
   credit: string;
@@ -11,7 +14,7 @@ const { src, alt, href, credit } = Astro.props;
 
 <div class="flex flex-col items-center">
   <a href={href}>
-    <img src={src} alt={alt} height="250" width="250" class="shadow-md" />
+    <Image src={src} alt={alt} width={250} height={250} class="shadow-md" />
   </a>
-  <p class="bg-mexi-black bg-opacity-50">{credit}</p>
+  <p class="bg-mexi-black/50">{credit}</p>
 </div>

@@ -3,6 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import BackgroundImage from "../components/BackgroundImage.astro";
 import ConcertList from "../components/ConcertList.astro";
 import { CalendarCheck, History } from "@lucide/astro";
+import concertsImage from "../assets/images/concerts-image.jpg";
 
 // Upcoming concerts data
 const upcomingConcerts = [
@@ -33,7 +34,7 @@ const previousConcerts = [
 >
   <BackgroundImage
     alt="Bilde fra konserten på Vulkan arena"
-    src="/concerts-image.jpg"
+    src={concertsImage}
   />
   <div class="text-mexi-cream mx-auto w-full max-w-4xl px-6 py-12 md:px-12">
     <header class="mb-12 text-center">
