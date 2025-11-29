@@ -1,4 +1,6 @@
 ---
+import { CalendarDays, MapPin } from "@lucide/astro";
+
 interface Concert {
   date: string;
   venue: string;
@@ -33,14 +35,14 @@ const { concerts, type } = Astro.props;
               </h3>
               <div class="flex flex-col gap-2 text-gray-800">
                 <p class="flex items-center gap-2">
-                  <i class="fas fa-calendar-alt text-mexi-green w-5" />
+                  <CalendarDays class="size-5 text-mexi-green" />
                   <span class="font-medium">{concert.date}</span>
                   {concert.time && (
                     <span class="ml-2 text-gray-600">• {concert.time}</span>
                   )}
                 </p>
                 <p class="flex items-center gap-2">
-                  <i class="fas fa-map-marker-alt text-mexi-green w-5" />
+                  <MapPin class="size-5 text-mexi-green" />
                   <span class="font-medium">{concert.location}</span>
                 </p>
               </div>

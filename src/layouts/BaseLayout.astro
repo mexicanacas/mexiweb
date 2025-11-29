@@ -22,10 +22,6 @@ const { title, description, keywords } = Astro.props;
     {keywords && <meta name="keywords" content={keywords} />}
     <title>{title}</title>
     <ClientRouter />
-    <script
-      is:inline
-      src="https://kit.fontawesome.com/701c0b74f9.js"
-      crossorigin="anonymous"></script>
   </head>
   <body>
     <Header />

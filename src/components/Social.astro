@@ -1,5 +1,11 @@
 ---
 // Social media links component
+
+import { Mail } from "@lucide/astro";
+import Facebook from "../assets/brand-icons/facebook.svg";
+import Instagram from "../assets/brand-icons/instagram.svg";
+import Spotify from "../assets/brand-icons/spotify.svg";
+import Tiktok from "../assets/brand-icons/tiktok.svg";
 ---
 
 <nav class="flex justify-around gap-4 text-4xl">
@@ -10,7 +16,7 @@
     href="https://www.instagram.com/mexicanacas?igsh=b3B5N3ZycnI0YzBx"
     class="hover:text-primary/80"
   >
-    <i class="fa-brands fa-instagram"></i>
+    <Instagram height={36} fill={"currentColor"} />
   </a>
   <a
     target="_blank"
@@ -19,7 +25,7 @@
     href="https://open.spotify.com/artist/2I4RX8u3uyBXG0kxvhzLui?si=AULMUxW9SGeEl_sQCOWy8Q"
     class="hover:text-primary/80"
   >
-    <i class="fa-brands fa-spotify"></i>
+    <Spotify height={36} fill={"currentColor"} />
   </a>
   <a
     target="_blank"
@@ -28,7 +34,7 @@
     href="https://www.tiktok.com/@mexicanacas"
     class="hover:text-primary/80"
   >
-    <i class="fa-brands fa-tiktok"></i>
+    <Tiktok height={36} fill={"currentColor"} />
   </a>
   <a
     target="_blank"
@@ -37,9 +43,9 @@
     href="https://www.facebook.com/losmexicanacas"
     class="hover:text-primary/80"
   >
-    <i class="fa-brands fa-facebook-f"></i>
+    <Facebook height={36} fill={"currentColor"} />
   </a>
   <a href="mailto:booking@mexi.no" class="hover:text-primary/80">
-    <i class="fa-solid fa-envelope"></i>
+    <Mail class="size-9" />
   </a>
 </nav>
