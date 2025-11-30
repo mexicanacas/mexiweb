@@ -18,8 +18,7 @@ const isActive = (href: string) => {
 <div class="md:hidden">
 	<!-- Hamburger Button -->
 	<button
-		id="hamburger-button"
-		class="flex flex-col gap-1.5 p-2 focus:outline-none"
+		class="hamburger-toggle flex flex-col gap-1.5 p-2 focus:outline-none"
 		aria-label="Toggle menu"
 		aria-expanded="false"
 	>
@@ -33,7 +32,7 @@ const isActive = (href: string) => {
 	</button>
 
 	<!-- Mobile Menu Dropdown -->
-	<div id="mobile-menu" class="absolute top-full right-0 left-0 hidden">
+	<div class="hamburger-menu absolute top-full right-0 left-0 hidden">
 		<div class="bg-mexi-black border-mexi-white border-b-4">
 			<ul>
 				{
@@ -56,9 +55,7 @@ const isActive = (href: string) => {
 				}
 				<!-- Mobile Book CTA -->
 				<li class="bg-mexi-gray p-4">
-					<SkewButton href="/booking" class="w-full justify-center" confetti>
-						Book oss!
-					</SkewButton>
+					<SkewButton href="/booking" class="w-full justify-center" confetti>Book oss!</SkewButton>
 				</li>
 			</ul>
 		</div>
@@ -66,58 +63,21 @@ const isActive = (href: string) => {
 </div>
 
 <script>
-	function initHamburgerMenu() {
-		const hamburgerButton = document.getElementById('hamburger-button');
-		const mobileMenu = document.getElementById('mobile-menu');
-		const hamburgerLines = document.querySelectorAll('.hamburger-line');
+	document.addEventListener('astro:page-load', () => {
+		const button = document.querySelector('.hamburger-toggle');
+		const menu = document.querySelector('.hamburger-menu');
+		const lines = document.querySelectorAll('.hamburger-line');
 
-		// Reset menu state on page load
-		mobileMenu?.classList.add('hidden');
-		hamburgerButton?.setAttribute('aria-expanded', 'false');
-		hamburgerLines[0]?.classList.remove('rotate-45', 'translate-y-2');
-		hamburgerLines[1]?.classList.remove('opacity-0');
-		hamburgerLines[2]?.classList.remove('-rotate-45', '-translate-y-2');
+		button?.addEventListener('click', () => {
+			const isOpen = button.getAttribute('aria-expanded') === 'true';
+			button.setAttribute('aria-expanded', String(!isOpen));
+			menu?.classList.toggle('hidden');
 
-		function toggleMenu() {
-			const isExpanded = hamburgerButton?.getAttribute('aria-expanded') === 'true';
-
-			hamburgerButton?.setAttribute('aria-expanded', String(!isExpanded));
-			mobileMenu?.classList.toggle('hidden');
-
-			// Animate hamburger to X
-			if (!isExpanded) {
-				hamburgerLines[0]?.classList.add('rotate-45', 'translate-y-2');
-				hamburgerLines[1]?.classList.add('opacity-0');
-				hamburgerLines[2]?.classList.add('-rotate-45', '-translate-y-2');
-			} else {
-				hamburgerLines[0]?.classList.remove('rotate-45', 'translate-y-2');
-				hamburgerLines[1]?.classList.remove('opacity-0');
-				hamburgerLines[2]?.classList.remove('-rotate-45', '-translate-y-2');
-			}
-		}
-
-		// Remove old listeners by cloning
-		if (hamburgerButton) {
-			const newButton = hamburgerButton.cloneNode(true);
-			hamburgerButton.parentNode?.replaceChild(newButton, hamburgerButton);
-			newButton.addEventListener('click', toggleMenu);
-		}
-
-		// Close menu when clicking a link
-		const menuLinks = mobileMenu?.querySelectorAll('a');
-		menuLinks?.forEach((link) => {
-			const newLink = link.cloneNode(true) as HTMLElement;
-			link.parentNode?.replaceChild(newLink, link);
-			newLink.addEventListener('click', () => {
-				const currentMenu = document.getElementById('mobile-menu');
-				if (!currentMenu?.classList.contains('hidden')) {
-					toggleMenu();
-				}
-			});
+			lines[0]?.classList.toggle('rotate-45', !isOpen);
+			lines[0]?.classList.toggle('translate-y-2', !isOpen);
+			lines[1]?.classList.toggle('opacity-0', !isOpen);
+			lines[2]?.classList.toggle('-rotate-45', !isOpen);
+			lines[2]?.classList.toggle('-translate-y-2', !isOpen);
 		});
-	}
-
-	// Run on initial load and after View Transitions
-	initHamburgerMenu();
-	document.addEventListener('astro:page-load', initHamburgerMenu);
+	});
 </script>
