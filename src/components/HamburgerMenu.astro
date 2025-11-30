@@ -33,7 +33,7 @@ const isActive = (href: string) => {
 
 	<!-- Mobile Menu Dropdown -->
 	<div class="hamburger-menu absolute top-full right-0 left-0 hidden">
-		<div class="bg-mexi-black border-mexi-white border-b-4">
+		<div class="bg-mexi-black border-b-mexi-white border-b-4">
 			<ul>
 				{
 					links.map((link) => (
@@ -41,7 +41,7 @@ const isActive = (href: string) => {
 							<a
 								href={link.href}
 								class:list={[
-									'border-mexi-white/10 block border-b px-6 py-4 text-lg font-bold tracking-wide transition-all duration-200',
+									'border-mexi-white/30 block border-b px-6 py-4 text-lg font-bold tracking-wide transition-all duration-200',
 									isActive(link.href)
 										? 'bg-mexi-green text-mexi-black'
 										: 'text-mexi-white hover:bg-mexi-red hover:text-mexi-white'
