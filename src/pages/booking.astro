@@ -8,6 +8,44 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import BackgroundImage from '../components/BackgroundImage.astro';
 import { SkewButton, SkewBanner, SectionHeader, Card } from '../components/ui';
 import bookingImage from '../assets/images/booking-image.jpg';
+
+const packages = [
+	{
+		icon: Guitar,
+		title: 'Pop-up',
+		description: 'Overraskelse! Vi dukker opp og sparker i gang festen.',
+		details: ['~20 minutter', '5–12 musikere'],
+		skew: 'left' as const,
+		shadow: 'red' as const,
+		iconClass: 'text-mexi-red size-5',
+		textClass: 'text-mexi-white/80',
+		listClass: 'text-mexi-white/70'
+	},
+	{
+		icon: Sparkles,
+		title: 'Feststart',
+		description: 'Perfekt for å sette stemningen på firmafester og bryllup.',
+		details: ['30–45 minutter', '8–15 musikere'],
+		variant: 'green' as const,
+		skew: 'right' as const,
+		shadow: 'black' as const,
+		featured: true,
+		iconClass: 'size-5',
+		textClass: 'text-mexi-black/80',
+		listClass: 'text-mexi-black/80'
+	},
+	{
+		icon: PartyPopper,
+		title: 'Hel kveld',
+		description: 'Vi er kveldens band med flere sett og pauser.',
+		details: ['2–3 timer', '10–30 musikere'],
+		skew: 'down' as const,
+		shadow: 'green' as const,
+		iconClass: 'text-mexi-red size-5',
+		textClass: 'text-mexi-white/80',
+		listClass: 'text-mexi-white/70'
+	}
+];
 ---
 
 <BaseLayout
@@ -45,50 +83,22 @@ import bookingImage from '../assets/images/booking-image.jpg';
 			/>
 
 			<div class="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-6">
-				<!-- Pop-up -->
-				<Card skew="left" shadow="red">
-					<div class="mb-3 flex items-center gap-2">
-						<Guitar class="text-mexi-red size-5" />
-						<h3 class="text-xl font-bold md:text-2xl">Pop-up</h3>
-					</div>
-					<p class="text-mexi-white/80 mb-4 text-sm leading-relaxed">
-						Overraskelse! Vi dukker opp og sparker i gang festen.
-					</p>
-					<ul class="text-mexi-white/70 space-y-1 text-sm">
-						<li>~20 minutter</li>
-						<li>5–12 musikere</li>
-					</ul>
-				</Card>
-
-				<!-- Opening act (featured) -->
-				<Card variant="green" skew="right" shadow="black" featured>
-					<div class="mb-3 flex items-center gap-2">
-						<Sparkles class="size-5" />
-						<h3 class="text-xl font-bold md:text-2xl">Feststart</h3>
-					</div>
-					<p class="text-mexi-black/80 mb-4 text-sm leading-relaxed font-medium">
-						Perfekt for å sette stemningen på firmafester og bryllup.
-					</p>
-					<ul class="text-mexi-black/80 space-y-1 text-sm font-medium">
-						<li>30–45 minutter</li>
-						<li>8–15 musikere</li>
-					</ul>
-				</Card>
-
-				<!-- Full event -->
-				<Card skew="down" shadow="green">
-					<div class="mb-3 flex items-center gap-2">
-						<PartyPopper class="text-mexi-red size-5" />
-						<h3 class="text-xl font-bold md:text-2xl">Hel kveld</h3>
-					</div>
-					<p class="text-mexi-white/80 mb-4 text-sm leading-relaxed">
-						Vi er kveldens band med flere sett og pauser.
-					</p>
-					<ul class="text-mexi-white/70 space-y-1 text-sm">
-						<li>2–3 timer</li>
-						<li>10–30 musikere</li>
-					</ul>
-				</Card>
+				{
+					packages.map((pkg) => (
+						<Card variant={pkg.variant} skew={pkg.skew} shadow={pkg.shadow} featured={pkg.featured}>
+							<div class="mb-3 flex items-center gap-2">
+								<pkg.icon class={pkg.iconClass} />
+								<h3 class="text-xl font-bold md:text-2xl">{pkg.title}</h3>
+							</div>
+							<p class:list={['mb-4 text-sm leading-relaxed', pkg.textClass]}>{pkg.description}</p>
+							<ul class:list={['space-y-1 text-sm', pkg.listClass]}>
+								{pkg.details.map((detail) => (
+									<li>{detail}</li>
+								))}
+							</ul>
+						</Card>
+					))
+				}
 			</div>
 		</section>
 	</div>
