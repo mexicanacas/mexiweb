@@ -1,20 +1,69 @@
 ---
-import { Mail } from '@lucide/astro';
 import Social from './Social.astro';
+
+const footerLinks = [
+	{ href: '/', label: 'Hjem' },
+	{ href: '/booking', label: 'Booking' },
+	{ href: '/concerts', label: 'Konserter' },
+	{ href: '/about', label: 'Om oss' }
+];
 ---
 
-<footer class="bg-mexi-green flex w-full flex-wrap items-center justify-between gap-4 p-8">
-	<div class="flex flex-col">
-		<h2 class="flex items-center gap-2 text-lg font-bold">
-			<Mail class="text-mexi-black size-5" />
-			Kontakt oss
-		</h2>
-		<a class="hover:text-mexi-dark/80 underline" href="mailto:booking@mexi.no">booking@mexi.no</a>
-		<span class="text-xs">
-			Fotokreditering
-			<a href="https://www.instagram.com/andrenesheim/">@andrenesheim</a> /
-			<a href="https://www.instagram.com/saltartmusic/">SALT</a>
-		</span>
+<footer class="bg-mexi-black text-mexi-white border-mexi-red border-t-4">
+	<div class="mx-auto grid max-w-6xl gap-8 p-8 md:grid-cols-3 md:px-12">
+		<!-- Navigation -->
+		<div>
+			<h2 class="mb-4 inline-block -rotate-1 text-lg font-bold tracking-wide uppercase">Sider</h2>
+			<ul class="space-y-2">
+				{
+					footerLinks.map((link) => (
+						<li>
+							<a
+								href={link.href}
+								class="text-mexi-white/70 hover:text-mexi-green transition-colors"
+							>
+								{link.label}
+							</a>
+						</li>
+					))
+				}
+			</ul>
+		</div>
+
+		<!-- Contact -->
+		<div>
+			<h2 class="mb-4 inline-block rotate-1 text-lg font-bold tracking-wide uppercase">Kontakt</h2>
+			<p class="text-mexi-white/70 mb-2 text-sm">Spørsmål om booking?</p>
+			<a
+				class="text-mexi-green hover:text-mexi-green/80 text-lg font-medium underline underline-offset-2 transition-colors"
+				href="mailto:booking@mexi.no"
+			>
+				booking@mexi.no
+			</a>
+		</div>
+
+		<!-- Social -->
+		<div>
+			<h2 class="mb-4 inline-block -rotate-[0.5deg] text-lg font-bold tracking-wide uppercase">
+				Følg oss
+			</h2>
+			<Social />
+		</div>
 	</div>
-	<Social />
+
+	<!-- Photo credits - minor attribution -->
+	<div class="border-mexi-white/10 border-t px-8 py-4 text-center">
+		<p class="text-mexi-white/50 text-sm">
+			Foto:
+			<a
+				href="https://www.instagram.com/andrenesheim/"
+				class="hover:text-mexi-white/70 transition-colors">@andrenesheim</a
+			>
+			&
+			<a
+				href="https://www.instagram.com/saltartmusic/"
+				class="hover:text-mexi-white/70 transition-colors">SALT</a
+			>
+		</p>
+	</div>
 </footer>

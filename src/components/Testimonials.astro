@@ -1,0 +1,94 @@
+---
+/**
+ * Testimonials component for social proof
+ * Uses Card component for consistent styling
+ */
+import { Card, SectionHeader } from './ui';
+
+interface Testimonial {
+	quote: string;
+	source: string;
+	context?: string;
+}
+
+const testimonials: Testimonial[] = [
+	{
+		quote: 'Bandet alle snakket om etter Slottsfjell.',
+		source: 'Tønsbergs Blad',
+		context: '2025'
+	},
+	{
+		quote: 'Beste med hele Slottsfjell.',
+		source: 'Festdeltaker',
+		context: 'Gen Z-godkjent'
+	},
+	{
+		quote: 'De fikk hele salen til å danse fra første tone!',
+		source: 'Firmakunde',
+		context: 'Julebord 2024'
+	}
+];
+
+// Card configurations for chaotic layout
+const cardConfigs = [
+	{ skew: 'left' as const, shadow: 'red' as const, variant: 'black' as const },
+	{ skew: 'right' as const, shadow: 'black' as const, variant: 'green' as const },
+	{ skew: 'down' as const, shadow: 'green' as const, variant: 'black' as const }
+];
+---
+
+<section class="text-mexi-white">
+	<SectionHeader
+		title="Hva Folk Sier"
+		subtitle="Ekte tilbakemeldinger fra ekte fiestas"
+		centered
+		class="mb-8"
+	/>
+
+	<div class="grid gap-4 md:grid-cols-3 md:gap-6">
+		{
+			testimonials.map((t, i) => (
+				<Card
+					variant={cardConfigs[i].variant}
+					skew={cardConfigs[i].skew}
+					shadow={cardConfigs[i].shadow}
+					featured={i === 1}
+				>
+					<blockquote
+						class:list={[
+							'mb-4 text-lg leading-relaxed font-medium md:text-xl',
+							cardConfigs[i].variant === 'green' ? 'font-bold' : ''
+						]}
+					>
+						«{t.quote}»
+					</blockquote>
+					<footer
+						class:list={[
+							'border-t-2 pt-4',
+							cardConfigs[i].variant === 'green' ? 'border-mexi-black/20' : 'border-mexi-white/20'
+						]}
+					>
+						<cite
+							class:list={[
+								'block text-sm not-italic md:text-base',
+								cardConfigs[i].variant === 'green' ? 'text-mexi-black/70' : 'text-mexi-white/60'
+							]}
+						>
+							— {t.source}
+						</cite>
+						{t.context && (
+							<span
+								class:list={[
+									'text-xs md:text-sm',
+									cardConfigs[i].variant === 'green' ? 'text-mexi-black/50' : 'text-mexi-white/40'
+								]}
+							>
+								{t.context}
+							</span>
+						)}
+					</footer>
+				</Card>
+			))
+		}
+	</div>
+</section>

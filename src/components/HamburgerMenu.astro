@@ -1,76 +1,123 @@
 ---
 // Hamburger Menu Component for mobile navigation
+import { SkewButton } from './ui';
+
 interface Props {
 	links: Array<{ href: string; label: string }>;
+	currentPath: string;
 }
 
-const { links } = Astro.props;
+const { links, currentPath } = Astro.props;
+
+const isActive = (href: string) => {
+	if (href === '/') return currentPath === '/';
+	return currentPath.startsWith(href);
+};
 ---
 
 <div class="md:hidden">
 	<!-- Hamburger Button -->
 	<button
 		id="hamburger-button"
-		class="flex flex-col gap-1.5 focus:outline-none"
+		class="flex flex-col gap-1.5 p-2 focus:outline-none"
 		aria-label="Toggle menu"
 		aria-expanded="false"
 	>
-		<span class="hamburger-line bg-mexi-cream block h-0.5 w-6 transition-all duration-300"></span>
-		<span class="hamburger-line bg-mexi-cream block h-0.5 w-6 transition-all duration-300"></span>
-		<span class="hamburger-line bg-mexi-cream block h-0.5 w-6 transition-all duration-300"></span>
+		<span
+			class="hamburger-line bg-mexi-white block h-0.5 w-6 origin-center transition-all duration-300"
+		></span>
+		<span class="hamburger-line bg-mexi-white block h-0.5 w-6 transition-all duration-300"></span>
+		<span
+			class="hamburger-line bg-mexi-white block h-0.5 w-6 origin-center transition-all duration-300"
+		></span>
 	</button>
 
 	<!-- Mobile Menu Dropdown -->
-	<div id="mobile-menu" class="bg-mexi-green absolute top-full right-0 left-0 hidden shadow-lg">
-		<ul class="flex flex-col">
-			{
-				links.map((link) => (
-					<li class="border-mexi-black/20 border-b">
-						<a
-							href={link.href}
-							class="text-mexi-cream hover:bg-mexi-black/20 block px-6 py-4 text-lg font-semibold transition-colors"
-						>
-							{link.label}
-						</a>
-					</li>
-				))
-			}
-		</ul>
+	<div id="mobile-menu" class="absolute top-full right-0 left-0 hidden">
+		<div class="bg-mexi-black border-mexi-white border-b-4">
+			<ul>
+				{
+					links.map((link) => (
+						<li>
+							<a
+								href={link.href}
+								class:list={[
+									'border-mexi-white/10 block border-b px-6 py-4 text-lg font-bold tracking-wide transition-all duration-200',
+									isActive(link.href)
+										? 'bg-mexi-green text-mexi-black'
+										: 'text-mexi-white hover:bg-mexi-red hover:text-mexi-white'
+								]}
+								aria-current={isActive(link.href) ? 'page' : undefined}
+							>
+								{link.label}
+							</a>
+						</li>
+					))
+				}
+				<!-- Mobile Book CTA -->
+				<li class="bg-mexi-gray p-4">
+					<SkewButton href="/booking" class="w-full justify-center" confetti>
+						Book oss!
+					</SkewButton>
+				</li>
+			</ul>
+		</div>
 	</div>
 </div>
 
 <script>
-	const hamburgerButton = document.getElementById('hamburger-button');
-	const mobileMenu = document.getElementById('mobile-menu');
-	const hamburgerLines = document.querySelectorAll('.hamburger-line');
+	function initHamburgerMenu() {
+		const hamburgerButton = document.getElementById('hamburger-button');
+		const mobileMenu = document.getElementById('mobile-menu');
+		const hamburgerLines = document.querySelectorAll('.hamburger-line');
 
-	function toggleMenu() {
-		const isExpanded = hamburgerButton?.getAttribute('aria-expanded') === 'true';
+		// Reset menu state on page load
+		mobileMenu?.classList.add('hidden');
+		hamburgerButton?.setAttribute('aria-expanded', 'false');
+		hamburgerLines[0]?.classList.remove('rotate-45', 'translate-y-2');
+		hamburgerLines[1]?.classList.remove('opacity-0');
+		hamburgerLines[2]?.classList.remove('-rotate-45', '-translate-y-2');
 
-		hamburgerButton?.setAttribute('aria-expanded', String(!isExpanded));
-		mobileMenu?.classList.toggle('hidden');
+		function toggleMenu() {
+			const isExpanded = hamburgerButton?.getAttribute('aria-expanded') === 'true';
 
-		// Animate hamburger to X
-		if (!isExpanded) {
-			hamburgerLines[0]?.classList.add('rotate-45', 'translate-y-2');
-			hamburgerLines[1]?.classList.add('opacity-0');
-			hamburgerLines[2]?.classList.add('-rotate-45', '-translate-y-2');
-		} else {
-			hamburgerLines[0]?.classList.remove('rotate-45', 'translate-y-2');
-			hamburgerLines[1]?.classList.remove('opacity-0');
-			hamburgerLines[2]?.classList.remove('-rotate-45', '-translate-y-2');
+			hamburgerButton?.setAttribute('aria-expanded', String(!isExpanded));
+			mobileMenu?.classList.toggle('hidden');
+
+			// Animate hamburger to X
+			if (!isExpanded) {
+				hamburgerLines[0]?.classList.add('rotate-45', 'translate-y-2');
+				hamburgerLines[1]?.classList.add('opacity-0');
+				hamburgerLines[2]?.classList.add('-rotate-45', '-translate-y-2');
+			} else {
+				hamburgerLines[0]?.classList.remove('rotate-45', 'translate-y-2');
+				hamburgerLines[1]?.classList.remove('opacity-0');
+				hamburgerLines[2]?.classList.remove('-rotate-45', '-translate-y-2');
+			}
 		}
+
+		// Remove old listeners by cloning
+		if (hamburgerButton) {
+			const newButton = hamburgerButton.cloneNode(true);
+			hamburgerButton.parentNode?.replaceChild(newButton, hamburgerButton);
+			newButton.addEventListener('click', toggleMenu);
+		}
+
+		// Close menu when clicking a link
+		const menuLinks = mobileMenu?.querySelectorAll('a');
+		menuLinks?.forEach((link) => {
+			const newLink = link.cloneNode(true) as HTMLElement;
+			link.parentNode?.replaceChild(newLink, link);
+			newLink.addEventListener('click', () => {
+				const currentMenu = document.getElementById('mobile-menu');
+				if (!currentMenu?.classList.contains('hidden')) {
+					toggleMenu();
+				}
+			});
+		});
 	}
 
-	hamburgerButton?.addEventListener('click', toggleMenu);
-
-	// Close menu when clicking a link
-	const menuLinks = mobileMenu?.querySelectorAll('a');
-	menuLinks?.forEach((link) => {
-		link.addEventListener('click', () => {
-			if (!mobileMenu?.classList.contains('hidden')) {
-				toggleMenu();
-			}
-		});
-	});
+	// Run on initial load and after View Transitions
+	initHamburgerMenu();
+	document.addEventListener('astro:page-load', initHamburgerMenu);
 </script>

@@ -1,8 +1,30 @@
 @import 'tailwindcss';
 
 @theme {
-	--color-mexi-black: #020d05;
-	--color-mexi-green: #8fa690;
-	--color-mexi-dark: #01261c;
-	--color-mexi-cream: #eef2ce;
+	/* Core palette: bold, festive, professional */
+	--color-mexi-black: #0a0a0a;
+	--color-mexi-white: #fafafa;
+	--color-mexi-red: #d62828;
+	--color-mexi-green: #4bb655;
+	--color-mexi-gray: #1a1a1a;
+
+	/* Typography - Tailwind v4 font theme variables */
+	--font-display: 'Righteous', cursive;
+	--font-body: 'Space Grotesk', system-ui, sans-serif;
+}
+
+/* Apply fonts globally */
+html {
+	font-family: var(--font-body);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: var(--font-display);
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
 }

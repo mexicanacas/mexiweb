@@ -16,6 +16,8 @@
 		"@astrojs/check": "^0.9.6",
 		"@astrojs/ts-plugin": "^1.10.6",
 		"@astrojs/vercel": "^9.0.2",
+		"@fontsource/righteous": "^5.2.7",
+		"@fontsource/space-grotesk": "^5.2.10",
 		"@lucide/astro": "^0.555.0",
 		"@tailwindcss/vite": "^4.1.17",
 		"astro": "^5.16.2",

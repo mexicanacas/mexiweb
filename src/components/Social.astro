@@ -4,43 +4,51 @@ import Facebook from '../assets/brand-icons/facebook.svg';
 import Instagram from '../assets/brand-icons/instagram.svg';
 import Spotify from '../assets/brand-icons/spotify.svg';
 import Tiktok from '../assets/brand-icons/tiktok.svg';
+
+const socials = [
+	{
+		icon: Instagram,
+		label: 'Instagram',
+		href: 'https://www.instagram.com/mexicanacas',
+		rotate: '-rotate-2'
+	},
+	{
+		icon: Spotify,
+		label: 'Spotify',
+		href: 'https://open.spotify.com/artist/2I4RX8u3uyBXG0kxvhzLui?si=AULMUxW9SGeEl_sQCOWy8Q',
+		rotate: 'rotate-2'
+	},
+	{
+		icon: Tiktok,
+		label: 'TikTok',
+		href: 'https://www.tiktok.com/@mexicanacas',
+		rotate: '-rotate-1'
+	},
+	{
+		icon: Facebook,
+		label: 'Facebook',
+		href: 'https://www.facebook.com/losmexicanacas',
+		rotate: 'rotate-1'
+	}
+];
 ---
 
-<nav class="flex justify-around gap-4 text-4xl">
-	<a
-		target="_blank"
-		rel="noopener noreferrer"
-		aria-label="Instagram"
-		href="https://www.instagram.com/mexicanacas?igsh=b3B5N3ZycnI0YzBx"
-		class="hover:text-mexi-dark/80"
-	>
-		<Instagram height={36} fill={'currentColor'} />
-	</a>
-	<a
-		target="_blank"
-		rel="noopener noreferrer"
-		aria-label="Spotify"
-		href="https://open.spotify.com/artist/2I4RX8u3uyBXG0kxvhzLui?si=AULMUxW9SGeEl_sQCOWy8Q"
-		class="hover:text-mexi-dark/80"
-	>
-		<Spotify height={36} fill={'currentColor'} />
-	</a>
-	<a
-		target="_blank"
-		rel="noopener noreferrer"
-		aria-label="TikTok"
-		href="https://www.tiktok.com/@mexicanacas"
-		class="hover:text-mexi-dark/80"
-	>
-		<Tiktok height={36} fill={'currentColor'} />
-	</a>
-	<a
-		target="_blank"
-		rel="noopener noreferrer"
-		aria-label="Facebook"
-		href="https://www.facebook.com/losmexicanacas"
-		class="hover:text-mexi-dark/80"
-	>
-		<Facebook height={36} fill={'currentColor'} />
-	</a>
+<nav class="flex flex-wrap gap-3">
+	{
+		socials.map(({ icon: Icon, label, href, rotate }) => (
+			<a
+				target="_blank"
+				rel="noopener noreferrer"
+				aria-label={label}
+				href={href}
+				class:list={[
+					'bg-mexi-black text-mexi-white border-mexi-white hover:bg-mexi-green hover:text-mexi-black hover:border-mexi-black',
+					'flex size-11 items-center justify-center border-3 transition-all duration-200 hover:scale-110 hover:rotate-0',
+					rotate
+				]}
+			>
+				<Icon height={20} fill={'currentColor'} />
+			</a>
+		))
+	}
 </nav>

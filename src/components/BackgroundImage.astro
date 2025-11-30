@@ -11,5 +11,17 @@ const { src, alt } = Astro.props;
 ---
 
 <div class="fixed -z-10 h-dvh w-screen overflow-hidden">
-	<Image src={src} alt={alt} width={1920} class="h-full w-full object-cover" />
+	<Image
+		src={src}
+		alt={alt}
+		width={1920}
+		class="h-full w-full object-cover"
+		loading="eager"
+		fetchpriority="high"
+	/>
+	<!-- Dark overlay for better text contrast -->
+	<div
+		class="from-mexi-black/70 via-mexi-black/50 to-mexi-black/80 absolute inset-0 bg-linear-to-b"
+	>
+	</div>
 </div>

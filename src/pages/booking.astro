@@ -1,6 +1,12 @@
 ---
+/**
+ * Booking page
+ * Showcases packages and contact information for potential clients
+ */
+import { PartyPopper, Sparkles, Guitar } from '@lucide/astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import BackgroundImage from '../components/BackgroundImage.astro';
+import { SkewButton, SkewBanner, SectionHeader, Card } from '../components/ui';
 import bookingImage from '../assets/images/booking-image.jpg';
 ---
 
@@ -10,31 +16,80 @@ import bookingImage from '../assets/images/booking-image.jpg';
 	keywords="festband, bryllup musikk, firmafest underholdning, bursdagsband, konferanse musikk, party band Norge, live musikk arrangement, pop-up band, sommerfest underholdning, jobbfest band, julebord musikk, event band booking, mariachi band Norge, firmaevent, bedriftsarrangement, teambuilding musikk, underholdning til firmafest, musikk til kickoff, band til sommerfest bedrift, band til julebord bedrift, bedriftsfest underholdning, eventbyrå musikk, live musikk bedrift"
 >
 	<BackgroundImage alt="Los Mexicanacas" src={bookingImage} />
-	<div class="text-mexi-cream flex flex-col items-center py-12 md:px-20">
-		<section class="bg-mexi-black/50 mx-auto flex max-w-5xl flex-col gap-4 p-6">
-			<h1 class="text-2xl md:text-4xl">Booking</h1>
-			<p class="text-xl">
-				Kontakt oss på
-				<a href="mailto:booking@mexi.no" class="hover:text-mexi-cream/80 underline">
-					booking@mexi.no
-				</a>
-				for et uforpliktende tilbud!
-			</p>
-			<p>
-				Los Mexicanacas er bandet som spiller opp til fest hvor som helst og for hvem som helst! Vi
-				spiller i bryllup og bursdager, på firmafester og store konferanser. Ingen scene er verken
-				for liten eller stor for oss.
-			</p>
-			<p>
-				Vi er i dag rundt 30 aktive medlemmer, og kan stille opp som alt fra kvintetter (5 personer)
-				til fullt band &ndash; men på de fleste spilleoppdrag er vi cirka 12 deltakere. Vi spiller
-				ofte i 20 minutter for å sparke i gang festen, ofte som en overraskelse, men kan også stille
-				som live band for kvelden og spille lengre sett.
-			</p>
-			<p>
-				Vi er fleksible og har lang erfaring med å tilpasse oss ditt arrangement og deres ønsker. Vi
-				gleder oss til å høre fra deg 🎉
-			</p>
+	<div class="text-mexi-white flex flex-col items-center px-4 py-8 md:px-12 md:py-12">
+		<section class="mx-auto w-full max-w-4xl">
+			<!-- Header banner -->
+			<SkewBanner class="mb-8">
+				<h1 class="text-3xl md:text-5xl">Booking</h1>
+				<p class="text-mexi-white/90 mt-2 text-base md:text-xl">La oss sparke i gang festen!</p>
+			</SkewBanner>
+
+			<!-- Contact CTA -->
+			<Card variant="transparent" hover={false} class="mb-6 text-center">
+				<p class="mb-2 text-xl font-bold md:text-2xl">Klar for fiesta?</p>
+				<p class="text-mexi-white/70 mb-6 text-sm md:text-base">
+					Kontakt oss for et uforpliktende tilbud!
+				</p>
+				<SkewButton href="mailto:booking@mexi.no" size="lg"> booking@mexi.no </SkewButton>
+				<p class="text-mexi-white/70 mt-4 text-sm md:text-base">
+					Vi spiller på alt fra bryllup til store festivaler. Med 5–30 musikere tilpasser vi oss
+					ditt arrangement — enten som pop-up overraskelse eller som kveldens hovedband.
+				</p>
+			</Card>
+
+			<!-- Packages header -->
+			<SectionHeader
+				title="Våre Formater"
+				subtitle="Velg det som passer ditt arrangement"
+				centered
+			/>
+
+			<div class="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-6">
+				<!-- Pop-up -->
+				<Card skew="left" shadow="red">
+					<div class="mb-3 flex items-center gap-2">
+						<Guitar class="text-mexi-red size-5" />
+						<h3 class="text-xl font-bold md:text-2xl">Pop-up</h3>
+					</div>
+					<p class="text-mexi-white/80 mb-4 text-sm leading-relaxed">
+						Overraskelse! Vi dukker opp og sparker i gang festen.
+					</p>
+					<ul class="text-mexi-white/70 space-y-1 text-sm">
+						<li>~20 minutter</li>
+						<li>5–12 musikere</li>
+					</ul>
+				</Card>
+
+				<!-- Opening act (featured) -->
+				<Card variant="green" skew="right" shadow="black" featured>
+					<div class="mb-3 flex items-center gap-2">
+						<Sparkles class="size-5" />
+						<h3 class="text-xl font-bold md:text-2xl">Feststart</h3>
+					</div>
+					<p class="text-mexi-black/80 mb-4 text-sm leading-relaxed font-medium">
+						Perfekt for å sette stemningen på firmafester og bryllup.
+					</p>
+					<ul class="text-mexi-black/80 space-y-1 text-sm font-medium">
+						<li>30–45 minutter</li>
+						<li>8–15 musikere</li>
+					</ul>
+				</Card>
+
+				<!-- Full event -->
+				<Card skew="down" shadow="green">
+					<div class="mb-3 flex items-center gap-2">
+						<PartyPopper class="text-mexi-red size-5" />
+						<h3 class="text-xl font-bold md:text-2xl">Hel kveld</h3>
+					</div>
+					<p class="text-mexi-white/80 mb-4 text-sm leading-relaxed">
+						Vi er kveldens band med flere sett og pauser.
+					</p>
+					<ul class="text-mexi-white/70 space-y-1 text-sm">
+						<li>2–3 timer</li>
+						<li>10–30 musikere</li>
+					</ul>
+				</Card>
+			</div>
 		</section>
 	</div>
 </BaseLayout>

@@ -1,0 +1,39 @@
+---
+/**
+ * Skewed page header banner component
+ * Used for page titles with that angular Mexican party vibe
+ *
+ * @example
+ * <SkewBanner>
+ *   <h1>Booking</h1>
+ *   <p>La oss sparke i gang festen!</p>
+ * </SkewBanner>
+ *
+ * <SkewBanner variant="green" skewDirection="up">
+ *   <h2>Kommende Konsert</h2>
+ * </SkewBanner>
+ */
+
+interface Props {
+	variant?: 'red' | 'green' | 'black';
+	skewDirection?: 'down' | 'up';
+	class?: string;
+}
+
+const { variant = 'red', skewDirection = 'down', class: className } = Astro.props;
+
+const skewClass = skewDirection === 'down' ? '-skew-y-1' : 'skew-y-1';
+const counterSkewClass = skewDirection === 'down' ? 'skew-y-1' : '-skew-y-1';
+
+const variantClasses = {
+	red: 'bg-mexi-red text-mexi-white',
+	green: 'bg-mexi-green text-mexi-black',
+	black: 'bg-mexi-black text-mexi-white'
+};
+---
+
+<div class:list={[variantClasses[variant], skewClass, 'px-8 py-6', className]}>
+	<div class={counterSkewClass}>
+		<slot />
+	</div>
+</div>
