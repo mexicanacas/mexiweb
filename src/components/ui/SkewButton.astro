@@ -5,7 +5,6 @@
  * @example
  * <SkewButton href="/booking">Book oss!</SkewButton>
  * <SkewButton href="/booking" variant="outline" size="sm">Les mer</SkewButton>
- * <SkewButton href="/booking" confetti>Book med konfetti!</SkewButton>
  */
 import type { HTMLAttributes } from 'astro/types';
 
@@ -13,17 +12,9 @@ interface Props extends HTMLAttributes<'a'> {
 	href: string;
 	variant?: 'primary' | 'secondary' | 'outline';
 	size?: 'sm' | 'md' | 'lg';
-	confetti?: boolean;
 }
 
-const {
-	href,
-	variant = 'primary',
-	size = 'md',
-	confetti = false,
-	class: className,
-	...rest
-} = Astro.props;
+const { href, variant = 'primary', size = 'md', class: className, ...rest } = Astro.props;
 
 const baseClasses =
 	'inline-flex -skew-x-5 items-center gap-2 font-bold tracking-wide transition-all duration-200 hover:scale-105';
@@ -44,82 +35,9 @@ const sizeClasses = {
 <a
 	href={href}
 	class:list={[baseClasses, variantClasses[variant], sizeClasses[size], className]}
-	data-confetti={confetti ? 'true' : undefined}
 	{...rest}
 >
 	<span class="flex skew-x-5 items-center gap-2">
 		<slot />
 	</span>
 </a>
-
-<script>
-	function createConfetti(x: number, y: number) {
-		const colors = ['#d62828', '#4bb655', '#f4a300', '#fafafa'];
-		const confettiCount = 30;
-
-		for (let i = 0; i < confettiCount; i++) {
-			const confetti = document.createElement('div');
-			confetti.style.cssText = `
-				position: fixed;
-				width: ${Math.random() * 10 + 5}px;
-				height: ${Math.random() * 10 + 5}px;
-				background: ${colors[Math.floor(Math.random() * colors.length)]};
-				left: ${x}px;
-				top: ${y}px;
-				pointer-events: none;
-				z-index: 9999;
-				transform: rotate(${Math.random() * 360}deg);
-			`;
-			document.body.appendChild(confetti);
-
-			const angle = Math.random() * Math.PI * 2;
-			const velocity = Math.random() * 200 + 100;
-			const vx = Math.cos(angle) * velocity;
-			const vy = Math.sin(angle) * velocity - 100;
-
-			let posX = x;
-			let posY = y;
-			let opacity = 1;
-			let rotation = Math.random() * 360;
-
-			const animate = () => {
-				posX += vx * 0.016;
-				posY += vy * 0.016 + 2;
-				rotation += 10;
-				opacity -= 0.02;
-
-				confetti.style.left = `${posX}px`;
-				confetti.style.top = `${posY}px`;
-				confetti.style.opacity = String(opacity);
-				confetti.style.transform = `rotate(${rotation}deg)`;
-
-				if (opacity > 0) {
-					requestAnimationFrame(animate);
-				} else {
-					confetti.remove();
-				}
-			};
-
-			requestAnimationFrame(animate);
-		}
-	}
-
-	function initConfetti() {
-		document.querySelectorAll('[data-confetti="true"]').forEach((btn) => {
-			// Remove existing listener by checking data attribute
-			if (btn.getAttribute('data-confetti-init') === 'true') return;
-			btn.setAttribute('data-confetti-init', 'true');
-
-			btn.addEventListener('click', (e) => {
-				const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
-				const x = rect.left + rect.width / 2;
-				const y = rect.top + rect.height / 2;
-				createConfetti(x, y);
-			});
-		});
-	}
-
-	// Run on initial load and after View Transitions
-	initConfetti();
-	document.addEventListener('astro:page-load', initConfetti);
-</script>
