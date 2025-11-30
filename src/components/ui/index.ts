@@ -1,8 +1,8 @@
 /**
  * UI Components
- * 
+ *
  * Reusable design components with the Mexican party vibe
- * 
+ *
  * @example
  * import { SkewButton, SkewBanner, Card, SectionHeader } from '../components/ui';
  */
