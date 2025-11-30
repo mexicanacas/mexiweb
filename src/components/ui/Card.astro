@@ -1,0 +1,63 @@
+---
+/**
+ * Card component with borders, colored shadows, and hover-to-straighten effect
+ *
+ * @example
+ * <Card>Content here</Card>
+ * <Card variant="green" featured>Featured content</Card>
+ * <Card skew="left" shadow="red">Tilted with red shadow</Card>
+ */
+
+interface Props {
+	variant?: 'black' | 'green' | 'transparent';
+	hover?: boolean;
+	skew?: 'none' | 'left' | 'right' | 'up' | 'down';
+	shadow?: 'none' | 'red' | 'green' | 'black';
+	featured?: boolean;
+	class?: string;
+}
+
+const {
+	variant = 'black',
+	hover = true,
+	skew = 'none',
+	shadow = 'none',
+	featured = false,
+	class: className
+} = Astro.props;
+
+const variantClasses = {
+	black: 'bg-mexi-black text-mexi-white border-mexi-white',
+	green: 'bg-mexi-green text-mexi-black border-mexi-black',
+	transparent: 'bg-mexi-black/90 text-mexi-white border-mexi-white'
+};
+
+const skewClasses = {
+	none: '',
+	left: '-rotate-2',
+	right: 'rotate-2',
+	up: '-rotate-1',
+	down: 'rotate-1'
+};
+
+const shadowClasses = {
+	none: '',
+	red: 'shadow-[6px_6px_0px_0px_#d62828]',
+	green: 'shadow-[6px_6px_0px_0px_#4bb655]',
+	black: 'shadow-[6px_6px_0px_0px_#0a0a0a]'
+};
+---
+
+<div
+	class:list={[
+		'border-4 p-6',
+		variantClasses[variant],
+		skewClasses[skew],
+		shadowClasses[shadow],
+		hover && 'transition-all duration-300 hover:scale-[1.02] hover:rotate-0 md:hover:scale-105',
+		featured && 'relative md:-translate-y-2 md:scale-[1.02]',
+		className
+	]}
+>
+	<slot />
+</div>

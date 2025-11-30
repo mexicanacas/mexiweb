@@ -1,8 +1,12 @@
 ---
+/**
+ * Concerts page
+ * Upcoming and previous concert listings
+ */
 import BaseLayout from '../layouts/BaseLayout.astro';
 import BackgroundImage from '../components/BackgroundImage.astro';
 import ConcertList from '../components/ConcertList.astro';
-import { CalendarCheck, History } from '@lucide/astro';
+import { SkewBanner, SectionHeader } from '../components/ui';
 import concertsImage from '../assets/images/concerts-image.jpg';
 
 // Upcoming concerts data
@@ -22,8 +26,27 @@ const previousConcerts = [
 		date: '11. juli 2025',
 		venue: 'Slottsfjell',
 		location: 'Tønsberg'
+	},
+	{
+		date: '8. februar 2025',
+		venue: 'Vulkan Arena',
+		location: 'Oslo'
+	},
+	{
+		date: '4. mai 2024',
+		venue: 'SALT art & music',
+		location: 'Oslo'
+	},
+	{
+		date: '17. november 2023',
+		venue: 'John Dee',
+		location: 'Oslo'
+	},
+	{
+		date: '23. mars 2018',
+		venue: 'Bursdagen til faren til en kompis',
+		location: 'Trondheim'
 	}
-	// Add more previous concerts here
 ];
 ---
 
@@ -32,35 +55,22 @@ const previousConcerts = [
 	description="Se våre kommende konserter og hvor Los Mexicanacas har spilt tidligere. Kjøp billetter til våre forestående show!"
 >
 	<BackgroundImage alt="Bilde fra konserten på Vulkan arena" src={concertsImage} />
-	<div class="text-mexi-cream mx-auto w-full max-w-4xl px-6 py-12 md:px-12">
-		<header class="mb-12 text-center">
-			<h1 class="mb-4 text-4xl font-bold md:text-5xl">Konserter</h1>
-			<p class="text-lg">
-				Opplev Los Mexicanacas live! Her finner du alle våre kommende og tidligere konserter.
-			</p>
-		</header>
+	<div class="text-mexi-white mx-auto w-full max-w-4xl px-4 py-12 md:px-12">
+		<!-- Header banner -->
+		<SkewBanner class="mb-8 text-center md:mb-12">
+			<h1 class="mb-2 text-3xl md:text-5xl">Konserter</h1>
+			<p class="text-mexi-white/90 text-sm md:text-base">Opplev Los Mexicanacas live!</p>
+		</SkewBanner>
 
 		<!-- Upcoming Concerts Section -->
-		<section class="mb-16">
-			<div class="mb-8">
-				<h2 class="mb-2 flex items-center gap-3 text-3xl font-bold">
-					<CalendarCheck class="text-mexi-green size-8" />
-					Kommende konserter
-				</h2>
-				<p>Bli med oss på en uforglemmelig kveld med fiesta og god stemning!</p>
-			</div>
+		<section class="mb-12 md:mb-16">
+			<SectionHeader title="Kommende Konserter" subtitle="Bli med på en uforglemmelig kveld!" />
 			<ConcertList concerts={upcomingConcerts} type="upcoming" />
 		</section>
 
 		<!-- Previous Concerts Section -->
 		<section>
-			<div class="mb-8">
-				<h2 class="mb-2 flex items-center gap-3 text-3xl font-bold">
-					<History class="text-mexi-green size-8" />
-					Tidligere konserter
-				</h2>
-				<p>Se hvor Los Mexicanacas har spredt fiesta tidligere.</p>
-			</div>
+			<SectionHeader title="Tidligere Konserter" subtitle="Se hvor vi har spredt fiesta." />
 			<ConcertList concerts={previousConcerts} type="previous" />
 		</section>
 	</div>

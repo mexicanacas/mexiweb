@@ -1,7 +1,51 @@
 ---
+/**
+ * Booking page
+ * Showcases packages and contact information for potential clients
+ */
+import { PartyPopper, Sparkles, Guitar } from '@lucide/astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import BackgroundImage from '../components/BackgroundImage.astro';
+import { SkewButton, SkewBanner, SectionHeader, Card } from '../components/ui';
 import bookingImage from '../assets/images/booking-image.jpg';
+
+const packages = [
+	{
+		icon: Guitar,
+		title: 'Pop-up',
+		description: 'Overraskelse! Vi dukker opp og sparker i gang festen.',
+		details: ['~20 minutter', '5–12 musikere'],
+		skew: 'left' as const,
+		shadow: 'red' as const,
+		iconClass: 'text-mexi-red size-5',
+		textClass: 'text-mexi-white/80',
+		listClass: 'text-mexi-white/70'
+	},
+	{
+		icon: Sparkles,
+		title: 'Feststart',
+		description: 'Perfekt for å sette stemningen på firmafester og bryllup.',
+		details: ['30–45 minutter', '8–15 musikere'],
+		variant: 'green' as const,
+		skew: 'right' as const,
+		shadow: 'black' as const,
+		featured: true,
+		iconClass: 'size-5',
+		textClass: 'text-mexi-black/80',
+		listClass: 'text-mexi-black/80'
+	},
+	{
+		icon: PartyPopper,
+		title: 'Hel kveld',
+		description: 'Vi er kveldens band med flere sett og pauser.',
+		details: ['2–3 timer', '10–30 musikere'],
+		skew: 'down' as const,
+		shadow: 'green' as const,
+		iconClass: 'text-mexi-red size-5',
+		textClass: 'text-mexi-white/80',
+		listClass: 'text-mexi-white/70'
+	}
+];
 ---
 
 <BaseLayout
@@ -10,31 +54,52 @@ import bookingImage from '../assets/images/booking-image.jpg';
 	keywords="festband, bryllup musikk, firmafest underholdning, bursdagsband, konferanse musikk, party band Norge, live musikk arrangement, pop-up band, sommerfest underholdning, jobbfest band, julebord musikk, event band booking, mariachi band Norge, firmaevent, bedriftsarrangement, teambuilding musikk, underholdning til firmafest, musikk til kickoff, band til sommerfest bedrift, band til julebord bedrift, bedriftsfest underholdning, eventbyrå musikk, live musikk bedrift"
 >
 	<BackgroundImage alt="Los Mexicanacas" src={bookingImage} />
-	<div class="text-mexi-cream flex flex-col items-center py-12 md:px-20">
-		<section class="bg-mexi-black/50 mx-auto flex max-w-5xl flex-col gap-4 p-6">
-			<h1 class="text-2xl md:text-4xl">Booking</h1>
-			<p class="text-xl">
-				Kontakt oss på
-				<a href="mailto:booking@mexi.no" class="hover:text-mexi-cream/80 underline">
-					booking@mexi.no
-				</a>
-				for et uforpliktende tilbud!
-			</p>
-			<p>
-				Los Mexicanacas er bandet som spiller opp til fest hvor som helst og for hvem som helst! Vi
-				spiller i bryllup og bursdager, på firmafester og store konferanser. Ingen scene er verken
-				for liten eller stor for oss.
-			</p>
-			<p>
-				Vi er i dag rundt 30 aktive medlemmer, og kan stille opp som alt fra kvintetter (5 personer)
-				til fullt band &ndash; men på de fleste spilleoppdrag er vi cirka 12 deltakere. Vi spiller
-				ofte i 20 minutter for å sparke i gang festen, ofte som en overraskelse, men kan også stille
-				som live band for kvelden og spille lengre sett.
-			</p>
-			<p>
-				Vi er fleksible og har lang erfaring med å tilpasse oss ditt arrangement og deres ønsker. Vi
-				gleder oss til å høre fra deg 🎉
-			</p>
+	<div class="text-mexi-white flex flex-col items-center px-4 py-8 md:px-12 md:py-12">
+		<section class="mx-auto w-full max-w-4xl">
+			<!-- Header banner -->
+			<SkewBanner class="mb-8">
+				<h1 class="text-3xl md:text-5xl">Booking</h1>
+				<p class="text-mexi-white/90 mt-2 text-base md:text-xl">La oss sparke i gang festen!</p>
+			</SkewBanner>
+
+			<!-- Contact CTA -->
+			<Card variant="transparent" hover={false} class="mb-6 text-center">
+				<p class="mb-2 text-xl font-bold md:text-2xl">Klar for fiesta?</p>
+				<p class="text-mexi-white/70 mb-6 text-sm md:text-base">
+					Kontakt oss for et uforpliktende tilbud!
+				</p>
+				<SkewButton href="mailto:booking@mexi.no" size="lg"> booking@mexi.no </SkewButton>
+				<p class="text-mexi-white/70 mt-4 text-sm md:text-base">
+					Vi spiller på alt fra bryllup til store festivaler. Med 5–30 musikere tilpasser vi oss
+					ditt arrangement — enten som pop-up overraskelse eller som kveldens hovedband.
+				</p>
+			</Card>
+
+			<!-- Packages header -->
+			<SectionHeader
+				title="Våre Formater"
+				subtitle="Velg det som passer ditt arrangement"
+				centered
+			/>
+
+			<div class="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-6">
+				{
+					packages.map((pkg) => (
+						<Card variant={pkg.variant} skew={pkg.skew} shadow={pkg.shadow} featured={pkg.featured}>
+							<div class="mb-3 flex items-center gap-2">
+								<pkg.icon class={pkg.iconClass} />
+								<h3 class="text-xl font-bold md:text-2xl">{pkg.title}</h3>
+							</div>
+							<p class:list={['mb-4 text-sm leading-relaxed', pkg.textClass]}>{pkg.description}</p>
+							<ul class:list={['space-y-1 text-sm', pkg.listClass]}>
+								{pkg.details.map((detail) => (
+									<li>{detail}</li>
+								))}
+							</ul>
+						</Card>
+					))
+				}
+			</div>
 		</section>
 	</div>
 </BaseLayout>

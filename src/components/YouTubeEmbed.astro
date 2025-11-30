@@ -1,5 +1,8 @@
 ---
-// Native Astro component for YouTube embed - no React needed!
+/**
+ * YouTube embed component
+ * Responsive video player with consistent border styling
+ */
 interface Props {
 	videoId: string;
 	title?: string;
@@ -8,13 +11,16 @@ interface Props {
 const { videoId, title = 'YouTube video' } = Astro.props;
 ---
 
-<div class="flex justify-center p-8">
+<div
+	class="bg-mexi-black border-mexi-white rotate-1 border-4 p-1 shadow-[6px_6px_0px_0px_#d62828] transition-transform duration-300 hover:rotate-0 md:p-2"
+>
 	<iframe
-		class="aspect-video h-auto max-w-full"
+		class="aspect-video h-auto w-full"
 		width="560"
 		height="315"
 		src={`https://www.youtube.com/embed/${videoId}`}
 		title={title}
+		loading="lazy"
 		allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
 		allowfullscreen></iframe>
 </div>

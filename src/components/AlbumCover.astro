@@ -7,14 +7,28 @@ interface Props {
 	alt: string;
 	href: string;
 	credit: string;
+	skew?: 'left' | 'right' | 'up' | 'down';
 }
 
-const { src, alt, href, credit } = Astro.props;
+const { src, alt, href, credit, skew = 'left' } = Astro.props;
+
+const skewClasses = {
+	left: '-rotate-2',
+	right: 'rotate-2',
+	up: '-rotate-1',
+	down: 'rotate-1'
+};
 ---
 
-<div class="flex flex-col items-center">
-	<a href={href} class="size-64">
-		<Image src={src} alt={alt} width={512} class="shadow-md" />
+<div class="group flex flex-col items-center gap-2">
+	<a
+		href={href}
+		class:list={[
+			'border-mexi-white overflow-hidden border-4 shadow-[4px_4px_0px_0px_#d62828] transition-all duration-300 hover:scale-[1.02] hover:rotate-0 md:hover:scale-105',
+			skewClasses[skew]
+		]}
+	>
+		<Image src={src} alt={alt} width={256} class="size-56 object-cover md:size-64" />
 	</a>
-	<p class="bg-mexi-black/80">{credit}</p>
+	<p class="text-mexi-white/50 text-sm">{credit}</p>
 </div>

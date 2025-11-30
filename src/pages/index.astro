@@ -1,9 +1,13 @@
 ---
-import { Image } from 'astro:assets';
+/**
+ * Homepage
+ * Main landing page with hero, testimonials, and concert promo
+ */
 import BaseLayout from '../layouts/BaseLayout.astro';
+import BackgroundImage from '../components/BackgroundImage.astro';
 import ConcertPromo from '../components/ConcertPromo.astro';
-import Social from '../components/Social.astro';
-import YouTubeEmbed from '../components/YouTubeEmbed.astro';
+import Testimonials from '../components/Testimonials.astro';
+import { SkewButton, Card } from '../components/ui';
 import heroImage from '../assets/images/homepage-image.jpg';
 ---
 
@@ -11,21 +15,39 @@ import heroImage from '../assets/images/homepage-image.jpg';
 	title="Los Mexicanacas | Norges grandeste og strammeste partyband!"
 	description="Vi er Los Mexicanacas og leverer live musikk, god stemning og fiestagaranti til alle typer arrangementer, fra bryllup og firmafester til bursdager og konserter."
 >
-	<div class="flex flex-col items-center">
-		<Image src={heroImage} alt="Los Mexicanacas" width={1920} priority class="w-full" />
-		<div class="flex w-full max-w-3xl flex-col gap-8 p-12">
-			<section>
-				<h1 class="mb-4 text-2xl font-bold md:text-4xl">Los Mexicanacas</h1>
-				<p>
-					¿Hva er dette? tenker du kanskje. Los Mexicanacas ble stiftet en kald, våt, varm,
-					vindstille og vindfull kveld 2017 i Trondheim av en gjeng overivrige studenter som ikke
-					fikk nok musikk av å synge i kor. Det er nå et av Nordens grandeste, strammeste og
-					varmeste undergrunns latino fusion-band.
-				</p>
+	<BackgroundImage alt="Los Mexicanacas" src={heroImage} />
+	<div class="text-mexi-white flex flex-col items-center">
+		<div class="flex w-full max-w-4xl flex-col gap-8 px-4 py-12 md:px-12">
+			<!-- Hero Section -->
+			<section class="relative">
+				<Card skew="up" shadow="red" class="p-6 md:p-12">
+					<div class="mb-6 text-center md:mb-8">
+						<h1 class="text-mexi-white text-4xl md:text-7xl">Los Mexicanacas</h1>
+						<p
+							class="text-mexi-green mt-2 text-lg font-bold tracking-wide md:text-2xl md:tracking-widest"
+						>
+							Norges Grandeste Partyband
+						</p>
+					</div>
+
+					<p
+						class="text-mexi-white/90 mx-auto max-w-2xl text-center text-base leading-relaxed md:text-xl"
+					>
+						<strong class="text-mexi-green">Latino fusion</strong> med rumba, mariachi og reggaeton —
+						perfekt for bryllup, firmafester og festivaler.
+					</p>
+
+					<div class="mt-8 flex justify-center md:mt-10">
+						<SkewButton href="/booking" size="lg">Book oss!</SkewButton>
+					</div>
+				</Card>
 			</section>
+
+			<!-- Testimonials - Social Proof -->
+			<Testimonials />
+
+			<!-- Concert Promo -->
 			<ConcertPromo />
-			<Social />
 		</div>
-		<YouTubeEmbed videoId="l168qWtKah0" title="Los Mexicanacas Promo Video" />
 	</div>
 </BaseLayout>

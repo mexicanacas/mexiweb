@@ -2,6 +2,11 @@
 import { ClientRouter } from 'astro:transitions';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import '@fontsource/righteous';
+import '@fontsource/space-grotesk/400.css';
+import '@fontsource/space-grotesk/500.css';
+import '@fontsource/space-grotesk/600.css';
+import '@fontsource/space-grotesk/700.css';
 import '../styles/global.css';
 
 interface Props {
@@ -28,7 +33,7 @@ const { title, description, keywords } = Astro.props;
 		<link rel="manifest" href="/favicon/site.webmanifest" />
 		<ClientRouter />
 	</head>
-	<body class="bg-mexi-cream text-mexi-dark flex min-h-dvh flex-col overflow-x-hidden">
+	<body class="bg-mexi-white text-mexi-black flex min-h-dvh flex-col overflow-x-hidden">
 		<Header />
 		<main class="flex-1 pt-20">
 			<slot />

@@ -1,0 +1,43 @@
+---
+/**
+ * Skewed CTA button component with Mexican party vibe
+ *
+ * @example
+ * <SkewButton href="/booking">Book oss!</SkewButton>
+ * <SkewButton href="/booking" variant="outline" size="sm">Les mer</SkewButton>
+ */
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props extends HTMLAttributes<'a'> {
+	href: string;
+	variant?: 'primary' | 'secondary' | 'outline';
+	size?: 'sm' | 'md' | 'lg';
+}
+
+const { href, variant = 'primary', size = 'md', class: className, ...rest } = Astro.props;
+
+const baseClasses =
+	'inline-flex -skew-x-5 items-center gap-2 font-bold tracking-wide transition-all duration-200 hover:scale-105';
+
+const variantClasses = {
+	primary: 'bg-mexi-green hover:bg-mexi-green/90 text-mexi-black',
+	secondary: 'bg-mexi-red hover:bg-mexi-red/90 text-mexi-white',
+	outline: 'border-2 border-mexi-green text-mexi-green hover:bg-mexi-green hover:text-mexi-black'
+};
+
+const sizeClasses = {
+	sm: 'px-4 py-2 text-sm',
+	md: 'px-6 py-3 text-base',
+	lg: 'px-8 py-3 text-lg md:px-10 md:py-4 md:text-xl'
+};
+---
+
+<a
+	href={href}
+	class:list={[baseClasses, variantClasses[variant], sizeClasses[size], className]}
+	{...rest}
+>
+	<span class="flex skew-x-5 items-center gap-2">
+		<slot />
+	</span>
+</a>
