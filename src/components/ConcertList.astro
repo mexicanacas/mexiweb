@@ -6,11 +6,10 @@
 import { SkewButton } from './ui';
 
 interface Concert {
-	date: string;
+	date: Date;
 	venue: string;
 	location: string;
 	ticketLink?: string;
-	time?: string;
 }
 
 interface Props {
@@ -19,6 +18,9 @@ interface Props {
 }
 
 const { concerts, type } = Astro.props;
+
+const formatDate = (date: Date) =>
+	date.toLocaleDateString('nb-NO', { day: 'numeric', month: 'long', year: 'numeric' });
 ---
 
 <div class="flex flex-col gap-4 md:gap-6">
@@ -56,8 +58,7 @@ const { concerts, type } = Astro.props;
 									type === 'upcoming' ? 'text-mexi-white/70' : 'text-mexi-white/50'
 								]}
 							>
-								{concert.date}
-								{concert.time && ` • ${concert.time}`} · {concert.location}
+								{formatDate(concert.date)} · {concert.location}
 							</p>
 						</div>
 						{concert.ticketLink && type === 'upcoming' && (
