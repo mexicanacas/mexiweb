@@ -5,6 +5,7 @@
  * Uses Astro Image optimization and consistent design patterns
  */
 import { Image } from 'astro:assets';
+import { ChevronLeft, ChevronRight } from '@lucide/astro';
 import { Card } from './ui';
 
 import gutta from '../assets/images/carousel/gutta.jpg';
@@ -84,35 +85,14 @@ const images = [
 					data-carousel-prev
 					aria-label="Forrige bilde"
 				>
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						class="size-4 md:size-6"
-						fill="none"
-						viewBox="0 0 24 24"
-						stroke="currentColor"
-					>
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							d="M15 19l-7-7 7-7"></path>
-					</svg>
+					<ChevronLeft class="size-4 md:size-6" />
 				</button>
 				<button
 					class="bg-mexi-black/70 text-mexi-white hover:bg-mexi-red border-mexi-white pointer-events-auto rounded-full border-2 p-2 transition-colors disabled:cursor-not-allowed disabled:opacity-50 md:p-3"
 					data-carousel-next
 					aria-label="Neste bilde"
 				>
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						class="size-4 md:size-6"
-						fill="none"
-						viewBox="0 0 24 24"
-						stroke="currentColor"
-					>
-						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"
-						></path>
-					</svg>
+					<ChevronRight class="size-4 md:size-6" />
 				</button>
 			</div>
 
