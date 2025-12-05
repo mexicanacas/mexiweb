@@ -94,7 +94,7 @@ const { images, class: className } = Astro.props;
 <script>
 	document.addEventListener('astro:page-load', () => {
 		const carousels = document.querySelectorAll('.carousel-container');
-		const keydownHandlers: ((e: Event) => void)[] = [];
+		const keydownHandlers: ((e: KeyboardEvent) => void)[] = [];
 		const autoplayIntervals: (number | undefined)[] = [];
 
 		carousels.forEach((carousel, carouselIndex) => {
@@ -108,7 +108,7 @@ const { images, class: className } = Astro.props;
 			const totalSlides = slides.length;
 
 			// Touch support
-			let touchStartX = 0;
+			let touchStartX: number | null = null;
 			let touchEndX = 0;
 			let isDragging = false;
 
@@ -147,11 +147,11 @@ const { images, class: className } = Astro.props;
 			});
 
 			// Keyboard navigation handler
-			const handleKeydown = (e: Event) => {
+			const handleKeydown = (e: KeyboardEvent) => {
 				// Only handle if carousel is focused or in view
 				if (document.activeElement?.closest('.carousel-container') === carousel) {
-					if ((e as KeyboardEvent).key === 'ArrowLeft') goToSlide(currentIndex - 1);
-					if ((e as KeyboardEvent).key === 'ArrowRight') goToSlide(currentIndex + 1);
+					if (e.key === 'ArrowLeft') goToSlide(currentIndex - 1);
+					if (e.key === 'ArrowRight') goToSlide(currentIndex + 1);
 				}
 			};
 			document.addEventListener('keydown', handleKeydown);
@@ -165,7 +165,7 @@ const { images, class: className } = Astro.props;
 			}, { passive: true });
 
 			track.addEventListener('touchmove', (e) => {
-				if (!isDragging) return;
+				if (!isDragging || touchStartX === null) return;
 				touchEndX = e.touches[0].clientX;
 				
 				// Prevent default scroll if it's a horizontal swipe
@@ -176,7 +176,7 @@ const { images, class: className } = Astro.props;
 			}, { passive: false });
 
 			track.addEventListener('touchend', () => {
-				if (!isDragging) return;
+				if (!isDragging || touchStartX === null) return;
 				isDragging = false;
 
 				const swipeThreshold = 50;
@@ -190,7 +190,8 @@ const { images, class: className } = Astro.props;
 					}
 				}
 
-				// Resume autoplay after a delay
+				// Reset touch position and resume autoplay after a delay
+				touchStartX = null;
 				setTimeout(startAutoplay, 1000);
 			}, { passive: true });
 
@@ -226,20 +227,26 @@ const { images, class: className } = Astro.props;
 			carousel.addEventListener('mouseleave', startAutoplay);
 		});
 
-		// Cleanup function for page transitions (outside forEach to run once)
-		document.addEventListener('astro:before-preparation', () => {
-			// Clean up all keyboard handlers
-			keydownHandlers.forEach((handler) => {
-				document.removeEventListener('keydown', handler);
-			});
-			
-			// Stop all autoplay intervals
-			autoplayIntervals.forEach((interval) => {
-				if (interval) {
-					clearInterval(interval);
-				}
-			});
-		}, { once: true });
+		// Cleanup function for page transitions
+		// Note: This uses { once: true } because a new listener is registered
+		// on each 'astro:page-load' event, so each listener should only run once
+		document.addEventListener(
+			'astro:before-preparation',
+			() => {
+				// Clean up all keyboard handlers
+				keydownHandlers.forEach((handler) => {
+					document.removeEventListener('keydown', handler);
+				});
+
+				// Stop all autoplay intervals
+				autoplayIntervals.forEach((interval) => {
+					if (interval) {
+						clearInterval(interval);
+					}
+				});
+			},
+			{ once: true }
+		);
 	});
 </script>
 
