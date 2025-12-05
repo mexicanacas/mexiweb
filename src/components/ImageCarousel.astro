@@ -25,10 +25,10 @@ const { images, class: className } = Astro.props;
 	<Card skew="up" shadow="red" class="overflow-hidden p-0">
 		<div class="carousel-container relative" tabindex="0">
 			<!-- Images Container -->
-			<div class="carousel-track flex transition-transform duration-500 ease-out h-64 md:h-96">
+			<div class="carousel-track flex h-64 transition-transform duration-500 ease-out md:h-96">
 				{
 					images.map((image, index) => (
-						<div class="carousel-slide w-full h-full flex-shrink-0" data-index={index}>
+						<div class="carousel-slide h-full w-full flex-shrink-0" data-index={index}>
 							<Image
 								src={image.src}
 								alt={image.alt}
@@ -43,9 +43,11 @@ const { images, class: className } = Astro.props;
 			</div>
 
 			<!-- Navigation Controls -->
-			<div class="absolute inset-0 flex items-center justify-between px-2 md:px-4 pointer-events-none">
+			<div
+				class="pointer-events-none absolute inset-0 flex items-center justify-between px-2 md:px-4"
+			>
 				<button
-					class="carousel-prev pointer-events-auto rounded-full bg-mexi-black/70 p-2 md:p-3 text-mexi-white hover:bg-mexi-red transition-colors border-2 border-mexi-white disabled:opacity-50 disabled:cursor-not-allowed"
+					class="carousel-prev bg-mexi-black/70 text-mexi-white hover:bg-mexi-red border-mexi-white pointer-events-auto rounded-full border-2 p-2 transition-colors disabled:cursor-not-allowed disabled:opacity-50 md:p-3"
 					aria-label="Previous image"
 				>
 					<svg
@@ -55,12 +57,15 @@ const { images, class: className } = Astro.props;
 						viewBox="0 0 24 24"
 						stroke="currentColor"
 					>
-						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"
-						></path>
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2"
+							d="M15 19l-7-7 7-7"></path>
 					</svg>
 				</button>
 				<button
-					class="carousel-next pointer-events-auto rounded-full bg-mexi-black/70 p-2 md:p-3 text-mexi-white hover:bg-mexi-red transition-colors border-2 border-mexi-white disabled:opacity-50 disabled:cursor-not-allowed"
+					class="carousel-next bg-mexi-black/70 text-mexi-white hover:bg-mexi-red border-mexi-white pointer-events-auto rounded-full border-2 p-2 transition-colors disabled:cursor-not-allowed disabled:opacity-50 md:p-3"
 					aria-label="Next image"
 				>
 					<svg
@@ -77,11 +82,11 @@ const { images, class: className } = Astro.props;
 			</div>
 
 			<!-- Indicators -->
-			<div class="absolute bottom-4 left-0 right-0 flex justify-center gap-2">
+			<div class="absolute right-0 bottom-4 left-0 flex justify-center gap-2">
 				{
 					images.map((_, index) => (
 						<button
-							class="carousel-indicator h-2 w-2 rounded-full transition-all border border-mexi-white"
+							class="carousel-indicator border-mexi-white h-2 w-2 rounded-full border transition-all"
 							data-index={index}
 							aria-label={`Go to image ${index + 1}`}
 						/>
@@ -159,42 +164,54 @@ const { images, class: className } = Astro.props;
 			keydownHandlers.push(handleKeydown);
 
 			// Touch/swipe support with passive flag
-			track.addEventListener('touchstart', (e) => {
-				touchStartX = e.touches[0].clientX;
-				isDragging = true;
-				stopAutoplay();
-			}, { passive: true });
+			track.addEventListener(
+				'touchstart',
+				(e) => {
+					touchStartX = e.touches[0].clientX;
+					isDragging = true;
+					stopAutoplay();
+				},
+				{ passive: true }
+			);
 
-			track.addEventListener('touchmove', (e) => {
-				if (!isDragging || touchStartX === null) return;
-				touchEndX = e.touches[0].clientX;
-				
-				// Prevent default scroll if it's a horizontal swipe
-				const diff = Math.abs(touchStartX - touchEndX);
-				if (diff > 10) {
-					e.preventDefault();
-				}
-			}, { passive: false });
+			track.addEventListener(
+				'touchmove',
+				(e) => {
+					if (!isDragging || touchStartX === null) return;
+					touchEndX = e.touches[0].clientX;
 
-			track.addEventListener('touchend', () => {
-				if (!isDragging || touchStartX === null) return;
-				isDragging = false;
-
-				const swipeThreshold = 50;
-				const diff = touchStartX - touchEndX;
-
-				if (Math.abs(diff) > swipeThreshold) {
-					if (diff > 0) {
-						goToSlide(currentIndex + 1);
-					} else {
-						goToSlide(currentIndex - 1);
+					// Prevent default scroll if it's a horizontal swipe
+					const diff = Math.abs(touchStartX - touchEndX);
+					if (diff > 10) {
+						e.preventDefault();
 					}
-				}
+				},
+				{ passive: false }
+			);
 
-				// Reset touch position and resume autoplay after a delay
-				touchStartX = null;
-				setTimeout(startAutoplay, 1000);
-			}, { passive: true });
+			track.addEventListener(
+				'touchend',
+				() => {
+					if (!isDragging || touchStartX === null) return;
+					isDragging = false;
+
+					const swipeThreshold = 50;
+					const diff = touchStartX - touchEndX;
+
+					if (Math.abs(diff) > swipeThreshold) {
+						if (diff > 0) {
+							goToSlide(currentIndex + 1);
+						} else {
+							goToSlide(currentIndex - 1);
+						}
+					}
+
+					// Reset touch position and resume autoplay after a delay
+					touchStartX = null;
+					setTimeout(startAutoplay, 1000);
+				},
+				{ passive: true }
+			);
 
 			// Initialize
 			updateCarousel();
@@ -203,7 +220,7 @@ const { images, class: className } = Astro.props;
 			const startAutoplay = () => {
 				// Don't start if already running
 				if (autoplayIntervals[carouselIndex]) return;
-				
+
 				autoplayIntervals[carouselIndex] = window.setInterval(() => {
 					if (currentIndex < totalSlides - 1) {
 						goToSlide(currentIndex + 1);
