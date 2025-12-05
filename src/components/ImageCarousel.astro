@@ -22,13 +22,15 @@ const { images, class: className } = Astro.props;
 ---
 
 <section class:list={['relative', className]}>
-	<Card skew="up" shadow="red" class="overflow-hidden p-0">
+	<Card skew="up" shadow="red" class="overflow-hidden p-0!">
 		<div class="carousel-container relative" tabindex="0">
 			<!-- Images Container -->
-			<div class="carousel-track flex h-64 transition-transform duration-500 ease-out md:h-96">
+			<div
+				class="carousel-track flex h-64 touch-pan-y transition-transform duration-500 ease-out md:h-96"
+			>
 				{
 					images.map((image, index) => (
-						<div class="carousel-slide h-full w-full flex-shrink-0" data-index={index}>
+						<div class="carousel-slide h-full w-full shrink-0" data-index={index}>
 							<Image
 								src={image.src}
 								alt={image.alt}
@@ -52,7 +54,7 @@ const { images, class: className } = Astro.props;
 				>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
-						class="h-4 w-4 md:h-6 md:w-6"
+						class="size-4 md:size-6"
 						fill="none"
 						viewBox="0 0 24 24"
 						stroke="currentColor"
@@ -70,7 +72,7 @@ const { images, class: className } = Astro.props;
 				>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
-						class="h-4 w-4 md:h-6 md:w-6"
+						class="size-4 md:size-6"
 						fill="none"
 						viewBox="0 0 24 24"
 						stroke="currentColor"
@@ -86,7 +88,7 @@ const { images, class: className } = Astro.props;
 				{
 					images.map((_, index) => (
 						<button
-							class="carousel-indicator border-mexi-white h-2 w-2 rounded-full border transition-all"
+							class="carousel-indicator border-mexi-white hover:bg-mexi-white/60 size-2 cursor-pointer rounded-full border transition-all"
 							data-index={index}
 							aria-label={`Go to image ${index + 1}`}
 						/>
@@ -267,17 +269,3 @@ const { images, class: className } = Astro.props;
 		);
 	});
 </script>
-
-<style>
-	.carousel-indicator {
-		cursor: pointer;
-	}
-
-	.carousel-indicator:hover {
-		background-color: rgba(250, 250, 250, 0.6);
-	}
-
-	.carousel-track {
-		touch-action: pan-y pinch-zoom;
-	}
-</style>
