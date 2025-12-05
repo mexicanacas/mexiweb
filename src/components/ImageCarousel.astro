@@ -95,8 +95,9 @@ const { images, class: className } = Astro.props;
 	document.addEventListener('astro:page-load', () => {
 		const carousels = document.querySelectorAll('.carousel-container');
 		const keydownHandlers: ((e: Event) => void)[] = [];
+		const autoplayIntervals: (number | undefined)[] = [];
 
-		carousels.forEach((carousel) => {
+		carousels.forEach((carousel, carouselIndex) => {
 			const track = carousel.querySelector('.carousel-track') as HTMLElement;
 			const slides = carousel.querySelectorAll('.carousel-slide');
 			const prevBtn = carousel.querySelector('.carousel-prev') as HTMLButtonElement;
@@ -197,12 +198,11 @@ const { images, class: className } = Astro.props;
 			updateCarousel();
 
 			// Auto-play (optional)
-			let autoplayInterval: number | undefined;
 			const startAutoplay = () => {
 				// Don't start if already running
-				if (autoplayInterval) return;
+				if (autoplayIntervals[carouselIndex]) return;
 				
-				autoplayInterval = window.setInterval(() => {
+				autoplayIntervals[carouselIndex] = window.setInterval(() => {
 					if (currentIndex < totalSlides - 1) {
 						goToSlide(currentIndex + 1);
 					} else {
@@ -212,9 +212,9 @@ const { images, class: className } = Astro.props;
 			};
 
 			const stopAutoplay = () => {
-				if (autoplayInterval) {
-					clearInterval(autoplayInterval);
-					autoplayInterval = undefined;
+				if (autoplayIntervals[carouselIndex]) {
+					clearInterval(autoplayIntervals[carouselIndex]);
+					autoplayIntervals[carouselIndex] = undefined;
 				}
 			};
 
@@ -234,10 +234,9 @@ const { images, class: className } = Astro.props;
 			});
 			
 			// Stop all autoplay intervals
-			carousels.forEach((carousel) => {
-				const autoplayInterval = (carousel as any).__autoplayInterval;
-				if (autoplayInterval) {
-					clearInterval(autoplayInterval);
+			autoplayIntervals.forEach((interval) => {
+				if (interval) {
+					clearInterval(interval);
 				}
 			});
 		}, { once: true });
