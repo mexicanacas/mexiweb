@@ -21,23 +21,37 @@ interface Props {
 const { images, class: className } = Astro.props;
 ---
 
-<section class:list={['relative', className]}>
+<section class:list={['relative', className]} aria-label="Bildekarusell">
 	<Card skew="down" shadow="red" class="overflow-hidden p-0!">
-		<div class="carousel-container relative" tabindex="0">
+		<div
+			class="relative select-none"
+			data-carousel
+			tabindex="0"
+			role="region"
+			aria-roledescription="karusell"
+		>
 			<!-- Images Container -->
 			<div
-				class="carousel-track flex h-64 touch-pan-y transition-transform duration-500 ease-out md:h-96"
+				class="flex h-64 touch-pan-y transition-transform duration-500 ease-out md:h-96"
+				data-carousel-track
 			>
 				{
 					images.map((image, index) => (
-						<div class="carousel-slide h-full w-full shrink-0" data-index={index}>
+						<div
+							class="h-full w-full shrink-0"
+							data-carousel-slide
+							role="group"
+							aria-roledescription="lysbilde"
+							aria-label={`${index + 1} av ${images.length}`}
+						>
 							<Image
 								src={image.src}
 								alt={image.alt}
 								width={1200}
 								height={600}
-								class="h-full w-full object-cover"
+								class="pointer-events-none h-full w-full object-cover"
 								loading={index === 0 ? 'eager' : 'lazy'}
+								draggable={false}
 							/>
 						</div>
 					))
@@ -49,8 +63,9 @@ const { images, class: className } = Astro.props;
 				class="pointer-events-none absolute inset-0 flex items-center justify-between px-2 md:px-4"
 			>
 				<button
-					class="carousel-prev bg-mexi-black/70 text-mexi-white hover:bg-mexi-red border-mexi-white pointer-events-auto rounded-full border-2 p-2 transition-colors disabled:cursor-not-allowed disabled:opacity-50 md:p-3"
-					aria-label="Previous image"
+					class="bg-mexi-black/70 text-mexi-white hover:bg-mexi-red border-mexi-white pointer-events-auto rounded-full border-2 p-2 transition-colors disabled:cursor-not-allowed disabled:opacity-50 md:p-3"
+					data-carousel-prev
+					aria-label="Forrige bilde"
 				>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
@@ -67,8 +82,9 @@ const { images, class: className } = Astro.props;
 					</svg>
 				</button>
 				<button
-					class="carousel-next bg-mexi-black/70 text-mexi-white hover:bg-mexi-red border-mexi-white pointer-events-auto rounded-full border-2 p-2 transition-colors disabled:cursor-not-allowed disabled:opacity-50 md:p-3"
-					aria-label="Next image"
+					class="bg-mexi-black/70 text-mexi-white hover:bg-mexi-red border-mexi-white pointer-events-auto rounded-full border-2 p-2 transition-colors disabled:cursor-not-allowed disabled:opacity-50 md:p-3"
+					data-carousel-next
+					aria-label="Neste bilde"
 				>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
@@ -88,9 +104,9 @@ const { images, class: className } = Astro.props;
 				{
 					images.map((_, index) => (
 						<button
-							class="carousel-indicator border-mexi-white hover:bg-mexi-white/60 size-2 cursor-pointer rounded-full border transition-all"
-							data-index={index}
-							aria-label={`Go to image ${index + 1}`}
+							class="border-mexi-white hover:bg-mexi-white/60 size-2 cursor-pointer rounded-full border transition-all"
+							data-carousel-indicator={index}
+							aria-label={`Gå til bilde ${index + 1}`}
 						/>
 					))
 				}
@@ -101,23 +117,23 @@ const { images, class: className } = Astro.props;
 
 <script>
 	document.addEventListener('astro:page-load', () => {
-		const carousels = document.querySelectorAll('.carousel-container');
+		const carousels = document.querySelectorAll('[data-carousel]');
 		const keydownHandlers: ((e: KeyboardEvent) => void)[] = [];
 		const autoplayIntervals: (number | undefined)[] = [];
 
 		carousels.forEach((carousel, carouselIndex) => {
-			const track = carousel.querySelector('.carousel-track') as HTMLElement;
-			const slides = carousel.querySelectorAll('.carousel-slide');
-			const prevBtn = carousel.querySelector('.carousel-prev') as HTMLButtonElement;
-			const nextBtn = carousel.querySelector('.carousel-next') as HTMLButtonElement;
-			const indicators = carousel.querySelectorAll('.carousel-indicator');
+			const track = carousel.querySelector('[data-carousel-track]') as HTMLElement;
+			const slides = carousel.querySelectorAll('[data-carousel-slide]');
+			const prevBtn = carousel.querySelector('[data-carousel-prev]') as HTMLButtonElement;
+			const nextBtn = carousel.querySelector('[data-carousel-next]') as HTMLButtonElement;
+			const indicators = carousel.querySelectorAll('[data-carousel-indicator]');
 
 			let currentIndex = 0;
 			const totalSlides = slides.length;
 
-			// Touch support
-			let touchStartX: number | null = null;
-			let touchEndX = 0;
+			// Drag/swipe support (touch and mouse)
+			let dragStartX: number | null = null;
+			let dragEndX = 0;
 			let isDragging = false;
 
 			function updateCarousel() {
@@ -157,7 +173,7 @@ const { images, class: className } = Astro.props;
 			// Keyboard navigation handler
 			const handleKeydown = (e: KeyboardEvent) => {
 				// Only handle if carousel is focused or in view
-				if (document.activeElement?.closest('.carousel-container') === carousel) {
+				if (document.activeElement?.closest('[data-carousel]') === carousel) {
 					if (e.key === 'ArrowLeft') goToSlide(currentIndex - 1);
 					if (e.key === 'ArrowRight') goToSlide(currentIndex + 1);
 				}
@@ -165,55 +181,77 @@ const { images, class: className } = Astro.props;
 			document.addEventListener('keydown', handleKeydown);
 			keydownHandlers.push(handleKeydown);
 
-			// Touch/swipe support with passive flag
-			track.addEventListener(
-				'touchstart',
-				(e) => {
-					touchStartX = e.touches[0].clientX;
-					isDragging = true;
-					stopAutoplay();
-				},
-				{ passive: true }
-			);
+			// Shared drag/swipe handler
+			const handleDragStart = (clientX: number) => {
+				dragStartX = clientX;
+				isDragging = true;
+				stopAutoplay();
+				track.style.cursor = 'grabbing';
+			};
+
+			const handleDragMove = (clientX: number) => {
+				if (!isDragging || dragStartX === null) return;
+				dragEndX = clientX;
+			};
+
+			const handleDragEnd = () => {
+				if (!isDragging || dragStartX === null) return;
+				isDragging = false;
+				track.style.cursor = 'grab';
+
+				const swipeThreshold = 50;
+				const diff = dragStartX - dragEndX;
+
+				if (Math.abs(diff) > swipeThreshold) {
+					if (diff > 0) {
+						goToSlide(currentIndex + 1);
+					} else {
+						goToSlide(currentIndex - 1);
+					}
+				}
+
+				dragStartX = null;
+				setTimeout(startAutoplay, 1000);
+			};
+
+			// Touch support
+			track.addEventListener('touchstart', (e) => handleDragStart(e.touches[0].clientX), {
+				passive: true
+			});
 
 			track.addEventListener(
 				'touchmove',
 				(e) => {
-					if (!isDragging || touchStartX === null) return;
-					touchEndX = e.touches[0].clientX;
-
+					handleDragMove(e.touches[0].clientX);
 					// Prevent default scroll if it's a horizontal swipe
-					const diff = Math.abs(touchStartX - touchEndX);
-					if (diff > 10) {
-						e.preventDefault();
+					if (isDragging && dragStartX !== null) {
+						const diff = Math.abs(dragStartX - e.touches[0].clientX);
+						if (diff > 10) e.preventDefault();
 					}
 				},
 				{ passive: false }
 			);
 
-			track.addEventListener(
-				'touchend',
-				() => {
-					if (!isDragging || touchStartX === null) return;
-					isDragging = false;
+			track.addEventListener('touchend', handleDragEnd, { passive: true });
 
-					const swipeThreshold = 50;
-					const diff = touchStartX - touchEndX;
+			// Mouse drag support for desktop
+			track.style.cursor = 'grab';
 
-					if (Math.abs(diff) > swipeThreshold) {
-						if (diff > 0) {
-							goToSlide(currentIndex + 1);
-						} else {
-							goToSlide(currentIndex - 1);
-						}
-					}
+			track.addEventListener('mousedown', (e) => {
+				e.preventDefault(); // Prevent image drag
+				handleDragStart(e.clientX);
+			});
 
-					// Reset touch position and resume autoplay after a delay
-					touchStartX = null;
-					setTimeout(startAutoplay, 1000);
-				},
-				{ passive: true }
-			);
+			track.addEventListener('mousemove', (e) => {
+				if (!isDragging) return;
+				e.preventDefault();
+				handleDragMove(e.clientX);
+			});
+
+			track.addEventListener('mouseup', handleDragEnd);
+			track.addEventListener('mouseleave', () => {
+				if (isDragging) handleDragEnd();
+			});
 
 			// Initialize
 			updateCarousel();
