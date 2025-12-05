@@ -23,7 +23,7 @@ const { images, class: className } = Astro.props;
 
 <section class:list={['relative', className]}>
 	<Card skew="up" shadow="red" class="overflow-hidden p-0">
-		<div class="carousel-container relative">
+		<div class="carousel-container relative" tabindex="0">
 			<!-- Images Container -->
 			<div class="carousel-track flex transition-transform duration-500 ease-out">
 				{
@@ -94,6 +94,7 @@ const { images, class: className } = Astro.props;
 <script>
 	document.addEventListener('astro:page-load', () => {
 		const carousels = document.querySelectorAll('.carousel-container');
+		const keydownHandlers: ((e: Event) => void)[] = [];
 
 		carousels.forEach((carousel) => {
 			const track = carousel.querySelector('.carousel-track') as HTMLElement;
@@ -153,17 +154,25 @@ const { images, class: className } = Astro.props;
 				}
 			};
 			document.addEventListener('keydown', handleKeydown);
+			keydownHandlers.push(handleKeydown);
 
-			// Touch/swipe support
+			// Touch/swipe support with passive flag
 			track.addEventListener('touchstart', (e) => {
 				touchStartX = e.touches[0].clientX;
 				isDragging = true;
-			});
+				stopAutoplay();
+			}, { passive: true });
 
 			track.addEventListener('touchmove', (e) => {
 				if (!isDragging) return;
 				touchEndX = e.touches[0].clientX;
-			});
+				
+				// Prevent default scroll if it's a horizontal swipe
+				const diff = Math.abs(touchStartX - touchEndX);
+				if (diff > 10) {
+					e.preventDefault();
+				}
+			}, { passive: false });
 
 			track.addEventListener('touchend', () => {
 				if (!isDragging) return;
@@ -179,7 +188,10 @@ const { images, class: className } = Astro.props;
 						goToSlide(currentIndex - 1);
 					}
 				}
-			});
+
+				// Resume autoplay after a delay
+				setTimeout(startAutoplay, 1000);
+			}, { passive: true });
 
 			// Initialize
 			updateCarousel();
@@ -187,6 +199,9 @@ const { images, class: className } = Astro.props;
 			// Auto-play (optional)
 			let autoplayInterval: number | undefined;
 			const startAutoplay = () => {
+				// Don't start if already running
+				if (autoplayInterval) return;
+				
 				autoplayInterval = window.setInterval(() => {
 					if (currentIndex < totalSlides - 1) {
 						goToSlide(currentIndex + 1);
@@ -209,16 +224,23 @@ const { images, class: className } = Astro.props;
 			// Pause on hover
 			carousel.addEventListener('mouseenter', stopAutoplay);
 			carousel.addEventListener('mouseleave', startAutoplay);
-
-			// Pause on touch
-			carousel.addEventListener('touchstart', stopAutoplay);
-
-			// Cleanup function for page transitions
-			document.addEventListener('astro:before-preparation', () => {
-				stopAutoplay();
-				document.removeEventListener('keydown', handleKeydown);
-			}, { once: true });
 		});
+
+		// Cleanup function for page transitions (outside forEach to run once)
+		document.addEventListener('astro:before-preparation', () => {
+			// Clean up all keyboard handlers
+			keydownHandlers.forEach((handler) => {
+				document.removeEventListener('keydown', handler);
+			});
+			
+			// Stop all autoplay intervals
+			carousels.forEach((carousel) => {
+				const autoplayInterval = (carousel as any).__autoplayInterval;
+				if (autoplayInterval) {
+					clearInterval(autoplayInterval);
+				}
+			});
+		}, { once: true });
 	});
 </script>
 
