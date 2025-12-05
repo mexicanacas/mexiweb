@@ -5,23 +5,39 @@
  * Uses Astro Image optimization and consistent design patterns
  */
 import { Image } from 'astro:assets';
-import type { ImageMetadata } from 'astro';
 import { Card } from './ui';
 
-interface CarouselImage {
-	src: ImageMetadata;
-	alt: string;
-}
+import gutta from '../assets/images/carousel/gutta.jpg';
+import hvasser from '../assets/images/carousel/hvasser.jpg';
+import kongenMarina from '../assets/images/carousel/kongen-marina.jpg';
+import osloMaraton from '../assets/images/carousel/oslo-maraton.jpeg';
+import slottsfjellBw from '../assets/images/carousel/slottsfjell-bw.jpg';
+import sundreball from '../assets/images/carousel/sundreball.jpg';
+import vinjerock from '../assets/images/carousel/vinjerock.jpg';
+import vulkanBak from '../assets/images/carousel/vulkan-bak.jpg';
+import vulkanDrømmedame from '../assets/images/carousel/vulkan-drømmedame.jpg';
+import vulkanGalleri from '../assets/images/carousel/vulkan-galleri.jpg';
+import vulkanUtsolgt from '../assets/images/carousel/vulkan-utsolgt.jpg';
 
-interface Props {
-	images: CarouselImage[];
-	class?: string;
-}
-
-const { images, class: className } = Astro.props;
+const images = [
+	{ src: gutta, alt: 'Gruppebilde av Los Mexicanacas' },
+	{ src: sundreball, alt: 'Los Mexicanacas opptrer på Sundreball' },
+	{ src: vulkanGalleri, alt: 'Los Mexicanacas opptrer på Vulkan Arena – sett fra galleriet' },
+	{ src: osloMaraton, alt: 'Los Mexicanacas opptrer i gatene på Oslo Maraton' },
+	{ src: kongenMarina, alt: 'Los Mexicanacas opptrer på Kongen Marina' },
+	{ src: vulkanBak, alt: 'Los Mexicanacas opptrer på Vulkan Arena' },
+	{
+		src: slottsfjellBw,
+		alt: 'Los Mexicanacas forbereder seg til opptreden på Slottsfjell-festivalen'
+	},
+	{ src: vinjerock, alt: 'Los Mexicanacas opptrer i campen på Vinjerock-festivalen' },
+	{ src: vulkanDrømmedame, alt: 'Los Mexicanacas opptrer på Vulkan Arena' },
+	{ src: vulkanUtsolgt, alt: 'Los Mexicanacas opptrer for et utsolgt publikum på Vulkan Arena' },
+	{ src: hvasser, alt: 'Gruppebilde av Los Mexicanacas fra øvingshelg på Hvasser' }
+];
 ---
 
-<section class:list={['relative', className]} aria-label="Bildekarusell">
+<section class="relative" aria-label="Bildekarusell">
 	<Card skew="down" shadow="red" class="overflow-hidden p-0!">
 		<div
 			class="relative select-none"

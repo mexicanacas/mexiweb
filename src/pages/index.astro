@@ -10,9 +10,6 @@ import Testimonials from '../components/Testimonials.astro';
 import ImageCarousel from '../components/ImageCarousel.astro';
 import { SkewButton, Card, SectionHeader } from '../components/ui';
 import heroImage from '../assets/images/background/homepage-image.jpg';
-import albumImage from '../assets/images/background/album-image.jpg';
-import bookingImage from '../assets/images/background/booking-image.jpg';
-import concertsImage from '../assets/images/background/concerts-image.jpg';
 ---
 
 <BaseLayout
@@ -55,13 +52,7 @@ import concertsImage from '../assets/images/background/concerts-image.jpg';
 					centered
 					class="mb-8"
 				/>
-				<ImageCarousel
-					images={[
-						{ src: albumImage, alt: 'Los Mexicanacas band photo' },
-						{ src: bookingImage, alt: 'Los Mexicanacas performing live' },
-						{ src: concertsImage, alt: 'Los Mexicanacas at concert' }
-					]}
-				/>
+				<ImageCarousel />
 			</section>
 
 			<!-- Testimonials - Social Proof -->
