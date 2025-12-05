@@ -144,14 +144,15 @@ const { images, class: className } = Astro.props;
 				indicator.addEventListener('click', () => goToSlide(index));
 			});
 
-			// Keyboard navigation (on window level to catch key events)
-			document.addEventListener('keydown', (e) => {
+			// Keyboard navigation handler
+			const handleKeydown = (e: Event) => {
 				// Only handle if carousel is focused or in view
 				if (document.activeElement?.closest('.carousel-container') === carousel) {
 					if ((e as KeyboardEvent).key === 'ArrowLeft') goToSlide(currentIndex - 1);
 					if ((e as KeyboardEvent).key === 'ArrowRight') goToSlide(currentIndex + 1);
 				}
-			});
+			};
+			document.addEventListener('keydown', handleKeydown);
 
 			// Touch/swipe support
 			track.addEventListener('touchstart', (e) => {
@@ -198,6 +199,7 @@ const { images, class: className } = Astro.props;
 			const stopAutoplay = () => {
 				if (autoplayInterval) {
 					clearInterval(autoplayInterval);
+					autoplayInterval = undefined;
 				}
 			};
 
@@ -210,6 +212,12 @@ const { images, class: className } = Astro.props;
 
 			// Pause on touch
 			carousel.addEventListener('touchstart', stopAutoplay);
+
+			// Cleanup function for page transitions
+			document.addEventListener('astro:before-preparation', () => {
+				stopAutoplay();
+				document.removeEventListener('keydown', handleKeydown);
+			}, { once: true });
 		});
 	});
 </script>
