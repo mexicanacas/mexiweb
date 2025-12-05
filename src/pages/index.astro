@@ -1,14 +1,15 @@
 ---
 /**
  * Homepage
- * Main landing page with hero, testimonials, and concert promo
+ * Main landing page with hero, image carousel, testimonials, and concert promo
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
 import BackgroundImage from '../components/BackgroundImage.astro';
 import ConcertPromo from '../components/ConcertPromo.astro';
 import Testimonials from '../components/Testimonials.astro';
-import { SkewButton, Card } from '../components/ui';
-import heroImage from '../assets/images/homepage-image.jpg';
+import ImageCarousel from '../components/ImageCarousel.astro';
+import { SkewButton, Card, SectionHeader } from '../components/ui';
+import heroImage from '../assets/images/background/homepage-image.jpg';
 ---
 
 <BaseLayout
@@ -41,6 +42,17 @@ import heroImage from '../assets/images/homepage-image.jpg';
 						<SkewButton href="/booking" size="lg">Book oss!</SkewButton>
 					</div>
 				</Card>
+			</section>
+
+			<!-- Image Carousel -->
+			<section>
+				<SectionHeader
+					title="Møt Gjengen"
+					subtitle="Los Mexicanacas i aksjon"
+					centered
+					class="mb-8"
+				/>
+				<ImageCarousel />
 			</section>
 
 			<!-- Testimonials - Social Proof -->

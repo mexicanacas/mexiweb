@@ -1,0 +1,306 @@
+---
+/**
+ * Image carousel component for showcasing band photos
+ * Mobile-friendly with touch swipe support and keyboard navigation
+ * Uses Astro Image optimization and consistent design patterns
+ */
+import { Image } from 'astro:assets';
+import { ChevronLeft, ChevronRight } from '@lucide/astro';
+import { Card } from './ui';
+
+import gutta from '../assets/images/carousel/gutta.jpg';
+import hvasser from '../assets/images/carousel/hvasser.jpg';
+import kongenMarina from '../assets/images/carousel/kongen-marina.jpg';
+import osloMaraton from '../assets/images/carousel/oslo-maraton.jpeg';
+import slottsfjellBw from '../assets/images/carousel/slottsfjell-bw.jpg';
+import sundreball from '../assets/images/carousel/sundreball.jpg';
+import vinjerock from '../assets/images/carousel/vinjerock.jpg';
+import vulkanBak from '../assets/images/carousel/vulkan-bak.jpg';
+import vulkanDrømmedame from '../assets/images/carousel/vulkan-drømmedame.jpg';
+import vulkanGalleri from '../assets/images/carousel/vulkan-galleri.jpg';
+import vulkanUtsolgt from '../assets/images/carousel/vulkan-utsolgt.jpg';
+
+const images = [
+	{ src: gutta, alt: 'Gruppebilde av Los Mexicanacas' },
+	{ src: sundreball, alt: 'Los Mexicanacas opptrer på Sundreball' },
+	{ src: vulkanGalleri, alt: 'Los Mexicanacas opptrer på Vulkan Arena – sett fra galleriet' },
+	{ src: osloMaraton, alt: 'Los Mexicanacas opptrer i gatene på Oslo Maraton' },
+	{ src: kongenMarina, alt: 'Los Mexicanacas opptrer på Kongen Marina' },
+	{ src: vulkanBak, alt: 'Los Mexicanacas opptrer på Vulkan Arena' },
+	{
+		src: slottsfjellBw,
+		alt: 'Los Mexicanacas forbereder seg til opptreden på Slottsfjell-festivalen'
+	},
+	{ src: vinjerock, alt: 'Los Mexicanacas opptrer i campen på Vinjerock-festivalen' },
+	{ src: vulkanDrømmedame, alt: 'Los Mexicanacas opptrer på Vulkan Arena' },
+	{ src: vulkanUtsolgt, alt: 'Los Mexicanacas opptrer for et utsolgt publikum på Vulkan Arena' },
+	{ src: hvasser, alt: 'Gruppebilde av Los Mexicanacas fra øvingshelg på Hvasser' }
+];
+---
+
+<section class="relative" aria-label="Bildekarusell">
+	<Card skew="down" shadow="red" class="overflow-hidden p-0!">
+		<div
+			class="relative select-none"
+			data-carousel
+			tabindex="0"
+			role="region"
+			aria-roledescription="karusell"
+		>
+			<!-- Images Container -->
+			<div
+				class="flex h-64 touch-pan-y transition-transform duration-500 ease-out md:h-96"
+				data-carousel-track
+			>
+				{
+					images.map((image, index) => (
+						<div
+							class="h-full w-full shrink-0"
+							data-carousel-slide
+							role="group"
+							aria-roledescription="lysbilde"
+							aria-label={`${index + 1} av ${images.length}`}
+						>
+							<Image
+								src={image.src}
+								alt={image.alt}
+								layout="constrained"
+								width={896}
+								height={384}
+								class="pointer-events-none h-full w-full object-cover"
+								priority={index === 0}
+								draggable={false}
+							/>
+						</div>
+					))
+				}
+			</div>
+
+			<!-- Navigation Controls -->
+			<div
+				class="pointer-events-none absolute inset-0 flex items-center justify-between px-2 md:px-4"
+			>
+				<button
+					class="bg-mexi-black/70 text-mexi-white hover:bg-mexi-red border-mexi-white pointer-events-auto rounded-full border-2 p-2 transition-colors disabled:cursor-not-allowed disabled:opacity-50 md:p-3"
+					data-carousel-prev
+					aria-label="Forrige bilde"
+				>
+					<ChevronLeft class="size-4 md:size-6" />
+				</button>
+				<button
+					class="bg-mexi-black/70 text-mexi-white hover:bg-mexi-red border-mexi-white pointer-events-auto rounded-full border-2 p-2 transition-colors disabled:cursor-not-allowed disabled:opacity-50 md:p-3"
+					data-carousel-next
+					aria-label="Neste bilde"
+				>
+					<ChevronRight class="size-4 md:size-6" />
+				</button>
+			</div>
+
+			<!-- Indicators -->
+			<div class="absolute right-0 bottom-4 left-0 flex justify-center gap-2">
+				{
+					images.map((_, index) => (
+						<button
+							class="border-mexi-white hover:bg-mexi-white/60 size-2 cursor-pointer rounded-full border transition-all"
+							data-carousel-indicator={index}
+							aria-label={`Gå til bilde ${index + 1}`}
+						/>
+					))
+				}
+			</div>
+		</div>
+	</Card>
+</section>
+
+<script>
+	document.addEventListener('astro:page-load', () => {
+		const carousels = document.querySelectorAll('[data-carousel]');
+		const keydownHandlers: ((e: KeyboardEvent) => void)[] = [];
+		const autoplayIntervals: (number | undefined)[] = [];
+
+		carousels.forEach((carousel, carouselIndex) => {
+			const track = carousel.querySelector('[data-carousel-track]') as HTMLElement;
+			const slides = carousel.querySelectorAll('[data-carousel-slide]');
+			const prevBtn = carousel.querySelector('[data-carousel-prev]') as HTMLButtonElement;
+			const nextBtn = carousel.querySelector('[data-carousel-next]') as HTMLButtonElement;
+			const indicators = carousel.querySelectorAll('[data-carousel-indicator]');
+
+			let currentIndex = 0;
+			const totalSlides = slides.length;
+
+			// Drag/swipe support (touch and mouse)
+			let dragStartX: number | null = null;
+			let dragEndX = 0;
+			let isDragging = false;
+
+			function updateCarousel() {
+				const offset = -currentIndex * 100;
+				track.style.transform = `translateX(${offset}%)`;
+
+				// Update indicators
+				indicators.forEach((indicator, index) => {
+					if (index === currentIndex) {
+						indicator.classList.add('bg-mexi-white', 'w-8');
+						indicator.classList.remove('bg-mexi-white/30');
+					} else {
+						indicator.classList.add('bg-mexi-white/30');
+						indicator.classList.remove('bg-mexi-white', 'w-8');
+					}
+				});
+
+				// Update button states
+				prevBtn.disabled = currentIndex === 0;
+				nextBtn.disabled = currentIndex === totalSlides - 1;
+			}
+
+			function goToSlide(index: number) {
+				currentIndex = Math.max(0, Math.min(index, totalSlides - 1));
+				updateCarousel();
+			}
+
+			// Button navigation
+			prevBtn?.addEventListener('click', () => goToSlide(currentIndex - 1));
+			nextBtn?.addEventListener('click', () => goToSlide(currentIndex + 1));
+
+			// Indicator navigation
+			indicators.forEach((indicator, index) => {
+				indicator.addEventListener('click', () => goToSlide(index));
+			});
+
+			// Keyboard navigation handler
+			const handleKeydown = (e: KeyboardEvent) => {
+				// Only handle if carousel is focused or in view
+				if (document.activeElement?.closest('[data-carousel]') === carousel) {
+					if (e.key === 'ArrowLeft') goToSlide(currentIndex - 1);
+					if (e.key === 'ArrowRight') goToSlide(currentIndex + 1);
+				}
+			};
+			document.addEventListener('keydown', handleKeydown);
+			keydownHandlers.push(handleKeydown);
+
+			// Shared drag/swipe handler
+			const handleDragStart = (clientX: number) => {
+				dragStartX = clientX;
+				isDragging = true;
+				stopAutoplay();
+				track.style.cursor = 'grabbing';
+			};
+
+			const handleDragMove = (clientX: number) => {
+				if (!isDragging || dragStartX === null) return;
+				dragEndX = clientX;
+			};
+
+			const handleDragEnd = () => {
+				if (!isDragging || dragStartX === null) return;
+				isDragging = false;
+				track.style.cursor = 'grab';
+
+				const swipeThreshold = 50;
+				const diff = dragStartX - dragEndX;
+
+				if (Math.abs(diff) > swipeThreshold) {
+					if (diff > 0) {
+						goToSlide(currentIndex + 1);
+					} else {
+						goToSlide(currentIndex - 1);
+					}
+				}
+
+				dragStartX = null;
+				setTimeout(startAutoplay, 1000);
+			};
+
+			// Touch support
+			track.addEventListener('touchstart', (e) => handleDragStart(e.touches[0].clientX), {
+				passive: true
+			});
+
+			track.addEventListener(
+				'touchmove',
+				(e) => {
+					handleDragMove(e.touches[0].clientX);
+					// Prevent default scroll if it's a horizontal swipe
+					if (isDragging && dragStartX !== null) {
+						const diff = Math.abs(dragStartX - e.touches[0].clientX);
+						if (diff > 10) e.preventDefault();
+					}
+				},
+				{ passive: false }
+			);
+
+			track.addEventListener('touchend', handleDragEnd, { passive: true });
+
+			// Mouse drag support for desktop
+			track.style.cursor = 'grab';
+
+			track.addEventListener('mousedown', (e) => {
+				e.preventDefault(); // Prevent image drag
+				handleDragStart(e.clientX);
+			});
+
+			track.addEventListener('mousemove', (e) => {
+				if (!isDragging) return;
+				e.preventDefault();
+				handleDragMove(e.clientX);
+			});
+
+			track.addEventListener('mouseup', handleDragEnd);
+			track.addEventListener('mouseleave', () => {
+				if (isDragging) handleDragEnd();
+			});
+
+			// Initialize
+			updateCarousel();
+
+			// Auto-play (optional)
+			const startAutoplay = () => {
+				// Don't start if already running
+				if (autoplayIntervals[carouselIndex]) return;
+
+				autoplayIntervals[carouselIndex] = window.setInterval(() => {
+					if (currentIndex < totalSlides - 1) {
+						goToSlide(currentIndex + 1);
+					} else {
+						goToSlide(0);
+					}
+				}, 5000);
+			};
+
+			const stopAutoplay = () => {
+				if (autoplayIntervals[carouselIndex]) {
+					clearInterval(autoplayIntervals[carouselIndex]);
+					autoplayIntervals[carouselIndex] = undefined;
+				}
+			};
+
+			// Start autoplay
+			startAutoplay();
+
+			// Pause on hover
+			carousel.addEventListener('mouseenter', stopAutoplay);
+			carousel.addEventListener('mouseleave', startAutoplay);
+		});
+
+		// Cleanup function for page transitions
+		// Note: This uses { once: true } because a new listener is registered
+		// on each 'astro:page-load' event, so each listener should only run once
+		document.addEventListener(
+			'astro:before-preparation',
+			() => {
+				// Clean up all keyboard handlers
+				keydownHandlers.forEach((handler) => {
+					document.removeEventListener('keydown', handler);
+				});
+
+				// Stop all autoplay intervals
+				autoplayIntervals.forEach((interval) => {
+					if (interval) {
+						clearInterval(interval);
+					}
+				});
+			},
+			{ once: true }
+		);
+	});
+</script>
