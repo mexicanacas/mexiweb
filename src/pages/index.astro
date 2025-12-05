@@ -1,14 +1,18 @@
 ---
 /**
  * Homepage
- * Main landing page with hero, testimonials, and concert promo
+ * Main landing page with hero, image carousel, testimonials, and concert promo
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
 import BackgroundImage from '../components/BackgroundImage.astro';
 import ConcertPromo from '../components/ConcertPromo.astro';
 import Testimonials from '../components/Testimonials.astro';
-import { SkewButton, Card } from '../components/ui';
+import ImageCarousel from '../components/ImageCarousel.astro';
+import { SkewButton, Card, SectionHeader } from '../components/ui';
 import heroImage from '../assets/images/homepage-image.jpg';
+import albumImage from '../assets/images/album-image.jpg';
+import bookingImage from '../assets/images/booking-image.jpg';
+import concertsImage from '../assets/images/concerts-image.jpg';
 ---
 
 <BaseLayout
@@ -41,6 +45,23 @@ import heroImage from '../assets/images/homepage-image.jpg';
 						<SkewButton href="/booking" size="lg">Book oss!</SkewButton>
 					</div>
 				</Card>
+			</section>
+
+			<!-- Image Carousel -->
+			<section>
+				<SectionHeader
+					title="Møt Gjengen"
+					subtitle="Los Mexicanacas i aksjon"
+					centered
+					class="mb-8"
+				/>
+				<ImageCarousel
+					images={[
+						{ src: albumImage, alt: 'Los Mexicanacas band photo' },
+						{ src: bookingImage, alt: 'Los Mexicanacas performing live' },
+						{ src: concertsImage, alt: 'Los Mexicanacas at concert' }
+					]}
+				/>
 			</section>
 
 			<!-- Testimonials - Social Proof -->
