@@ -25,15 +25,16 @@ const { images, class: className } = Astro.props;
 	<Card skew="up" shadow="red" class="overflow-hidden p-0">
 		<div class="carousel-container relative" tabindex="0">
 			<!-- Images Container -->
-			<div class="carousel-track flex transition-transform duration-500 ease-out">
+			<div class="carousel-track flex transition-transform duration-500 ease-out h-64 md:h-96">
 				{
 					images.map((image, index) => (
-						<div class="carousel-slide w-full flex-shrink-0" data-index={index}>
+						<div class="carousel-slide w-full h-full flex-shrink-0" data-index={index}>
 							<Image
 								src={image.src}
 								alt={image.alt}
 								width={1200}
-								class="h-64 w-full object-cover md:h-96"
+								height={600}
+								class="h-full w-full object-cover"
 								loading={index === 0 ? 'eager' : 'lazy'}
 							/>
 						</div>
@@ -42,14 +43,14 @@ const { images, class: className } = Astro.props;
 			</div>
 
 			<!-- Navigation Controls -->
-			<div class="absolute inset-0 flex items-center justify-between px-4 pointer-events-none">
+			<div class="absolute inset-0 flex items-center justify-between px-2 md:px-4 pointer-events-none">
 				<button
-					class="carousel-prev pointer-events-auto rounded-full bg-mexi-black/70 p-3 text-mexi-white hover:bg-mexi-red transition-colors border-2 border-mexi-white disabled:opacity-50 disabled:cursor-not-allowed"
+					class="carousel-prev pointer-events-auto rounded-full bg-mexi-black/70 p-2 md:p-3 text-mexi-white hover:bg-mexi-red transition-colors border-2 border-mexi-white disabled:opacity-50 disabled:cursor-not-allowed"
 					aria-label="Previous image"
 				>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
-						class="h-6 w-6"
+						class="h-4 w-4 md:h-6 md:w-6"
 						fill="none"
 						viewBox="0 0 24 24"
 						stroke="currentColor"
@@ -59,12 +60,12 @@ const { images, class: className } = Astro.props;
 					</svg>
 				</button>
 				<button
-					class="carousel-next pointer-events-auto rounded-full bg-mexi-black/70 p-3 text-mexi-white hover:bg-mexi-red transition-colors border-2 border-mexi-white disabled:opacity-50 disabled:cursor-not-allowed"
+					class="carousel-next pointer-events-auto rounded-full bg-mexi-black/70 p-2 md:p-3 text-mexi-white hover:bg-mexi-red transition-colors border-2 border-mexi-white disabled:opacity-50 disabled:cursor-not-allowed"
 					aria-label="Next image"
 				>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
-						class="h-6 w-6"
+						class="h-4 w-4 md:h-6 md:w-6"
 						fill="none"
 						viewBox="0 0 24 24"
 						stroke="currentColor"
