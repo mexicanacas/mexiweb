@@ -21,6 +21,10 @@ const { concerts, type } = Astro.props;
 
 const formatDate = (date: Date) =>
 	date.toLocaleDateString('nb-NO', { day: 'numeric', month: 'long', year: 'numeric' });
+
+const shadowColors = ['#4bb655', '#d62828', '#fafafa'];
+const getShadow = (index: number) =>
+	`shadow-[6px_6px_0px_0px_${shadowColors[index % shadowColors.length]}]`;
 ---
 
 <div class="flex flex-col gap-4 md:gap-6">
@@ -37,8 +41,15 @@ const formatDate = (date: Date) =>
 					class:list={[
 						'border-4 p-6 transition-all duration-300 hover:scale-[1.02] hover:rotate-0',
 						type === 'upcoming'
-							? 'bg-mexi-black border-mexi-white shadow-[6px_6px_0px_0px_#4bb655]'
-							: 'bg-mexi-black/60 border-mexi-white/30',
+							? `bg-mexi-black border-mexi-white ${getShadow(index)}`
+							: [
+									'bg-mexi-black/60',
+									index % 3 === 0
+										? 'border-mexi-green/30'
+										: index % 3 === 1
+											? 'border-mexi-red/30'
+											: 'border-mexi-white/30'
+								],
 						index % 2 === 0 ? 'rotate-1' : '-rotate-1'
 					]}
 				>
