@@ -9,19 +9,59 @@ import ConcertList from '../components/ConcertList.astro';
 import { SkewBanner, SectionHeader } from '../components/ui';
 import concertsImage from '../assets/images/background/concerts-image.jpg';
 
-// Upcoming concerts data
-const upcomingConcerts = [
+const allConcerts = [
+	{
+		date: new Date('2026-08-22'),
+		venue: 'Fæsterålen Musikkfestival',
+		location: 'Sortland',
+		link: 'https://www.festeralen.no/artister-2026/los-mexicanacas'
+	},
+	{
+		date: new Date('2026-08-15'),
+		venue: 'Hovden Fjellfestival',
+		location: 'Hovden',
+		link: 'https://hovden.com/hovden-fjellfestival'
+	},
+	{
+		date: new Date('2026-08-01'),
+		venue: 'Hygga 2026, Hygga Fjellkro',
+		location: 'Sjusjøen',
+		link: 'https://www.hyggafjellkro.no/konsert-hygga-2026'
+	},
+	{
+		date: new Date('2026-07-18'),
+		venue: 'Farsund Døds',
+		location: 'Farsund'
+	},
+	{
+		date: new Date('2026-07-16'),
+		venue: 'Fjåge I Vågen',
+		location: 'Stavanger'
+	},
+	{
+		date: new Date('2026-07-11'),
+		venue: 'GOD NOK Festivalen',
+		location: 'Steigen',
+		link: 'https://www.godnokfestivalen.no/los-mexicanacas/'
+	},
+	{
+		date: new Date('2026-07-10'),
+		venue: 'Slottsfjell',
+		location: 'Tønsberg',
+		link: 'https://slottsfjell.no/artister/los-mexicanacas/'
+	},
+	{
+		date: new Date('2026-06-13'),
+		venue: 'Byfesten',
+		location: 'Lillestrøm',
+		link: 'https://www.byfesten.no/event/los-mexicanacas/'
+	},
 	{
 		date: new Date('2026-05-30'),
 		venue: 'Rockefeller',
 		location: 'Oslo',
-		ticketLink: 'https://www.ticketmaster.no/event/los-mexicanacas-billetter/455694836'
-	}
-	// Add more upcoming concerts here
-];
-
-// Previous concerts data
-const previousConcerts = [
+		link: 'https://www.ticketmaster.no/event/los-mexicanacas-billetter/455694836'
+	},
 	{
 		date: new Date('2025-07-11'),
 		venue: 'Slottsfjell',
@@ -58,11 +98,22 @@ const previousConcerts = [
 		location: 'Trondheim'
 	}
 ];
+
+const today = new Date();
+today.setHours(0, 0, 0, 0);
+
+const upcomingConcerts = allConcerts
+	.filter((c) => c.date >= today)
+	.sort((a, b) => a.date.getTime() - b.date.getTime());
+
+const previousConcerts = allConcerts
+	.filter((c) => c.date < today)
+	.sort((a, b) => b.date.getTime() - a.date.getTime());
 ---
 
 <BaseLayout
 	title="Konserter | Los Mexicanacas"
-	description="Se våre kommende konserter og hvor Los Mexicanacas har spilt tidligere. Kjøp billetter til våre forestående show!"
+	description="Se våre kommende konserter, festivaler og hvor Los Mexicanacas har spilt tidligere. Kjøp billetter til våre forestående show!"
 >
 	<BackgroundImage alt="Bilde fra konserten på Vulkan arena" src={concertsImage} />
 	<div class="text-mexi-white mx-auto w-full max-w-4xl px-4 py-12 md:px-12">

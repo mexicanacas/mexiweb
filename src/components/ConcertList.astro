@@ -9,7 +9,7 @@ interface Concert {
 	date: Date;
 	venue: string;
 	location: string;
-	ticketLink?: string;
+	link?: string;
 }
 
 interface Props {
@@ -61,8 +61,8 @@ const formatDate = (date: Date) =>
 								{formatDate(concert.date)} · {concert.location}
 							</p>
 						</div>
-						{concert.ticketLink && type === 'upcoming' && (
-							<SkewButton href={concert.ticketLink} target="_blank" size="md">
+						{concert.link && type === 'upcoming' && (
+							<SkewButton href={concert.link} target="_blank" size="md">
 								Kjøp billetter
 							</SkewButton>
 						)}
