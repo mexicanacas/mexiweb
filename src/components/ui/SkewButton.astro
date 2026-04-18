@@ -17,7 +17,7 @@ interface Props extends HTMLAttributes<'a'> {
 const { href, variant = 'primary', size = 'md', class: className, ...rest } = Astro.props;
 
 const baseClasses =
-	'inline-flex -skew-x-5 items-center gap-2 font-bold tracking-wide transition-all duration-200 hover:scale-105';
+	'inline-flex -skew-x-5 items-center justify-center gap-2 font-bold tracking-wide transition-all duration-200 hover:scale-105';
 
 const variantClasses = {
 	primary: 'bg-mexi-green hover:bg-mexi-green/90 text-mexi-black',
